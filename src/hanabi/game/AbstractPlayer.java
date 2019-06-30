@@ -4,17 +4,33 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 
+import hanabi.cards.Card;
 import hanabi.cards.Hand;
 import hanabi.cards.ThreeState;
 
 public class AbstractPlayer {
 	
-	private Hand hand;
+	private ArrayList<Card> hand = new ArrayList<Card>();
 	private ArrayList<JTable> cardInfoTables = new ArrayList<JTable>();
 	
 	
+	
+	
+	public AbstractPlayer(Hand hand, ArrayList<JTable> cardInfoTables) {
+		super();
+		this.hand = hand;
+		this.cardInfoTables = cardInfoTables;
+		for (Card c : hand.getCards()) {
+			
+		}
+	}
+
+
+
+
 	//TODO receive and interpret info
 	//TODO deduce from visible cards
+	//TODO give info
 	//TODO discard
 	//TODO play card
 	//TODO draw card
