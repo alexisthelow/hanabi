@@ -23,11 +23,16 @@ public class AbstractPlayer {
 		}
 	}
 
+	//TODO play card
+
+	public Boolean playCard(int handIndex) { //return true if successful; return false if not
+		
+		
+	}
 	//TODO receive and interpret info
 	//TODO deduce from visible cards
 	//TODO give info
 	//TODO discard
-	//TODO play card
 	//TODO draw card
 	
 	public JTable getNewCardInfoTable() {
