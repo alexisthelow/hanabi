@@ -9,6 +9,7 @@ public class Deck {
 	public Deck(ArrayList<Card> cards) {
 		super();
 		this.cards = cards;
+		//TODO logic for creation of new deck -- check variant settings, add each relevant card to deck 
 	}
 
 	public ArrayList<Card> getCards() {
