@@ -8,9 +8,9 @@ public class Card {
 	
 	private Suit suit;
 	
-	String[] columnNames = {"Blue", "Green", "Red", "White", "Yellow", "Multicolor"};
+	private String[] columnNames = {"Blue", "Green", "Red", "White", "Yellow", "Multicolor"};
 	
-	ThreeState[][] rowData = {
+	private ThreeState[][] rowData = {
 			{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 			{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 			{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
@@ -18,6 +18,8 @@ public class Card {
 			{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 	};
 	
-	private JTable cardInfoTable = new JTable(rowData, columnNames);
+	private JTable cardInfo = new JTable(rowData, columnNames);
+	
+	
 
 }
