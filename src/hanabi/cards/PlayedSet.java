@@ -14,13 +14,16 @@ public class PlayedSet {
 	
 	public Boolean playableCheck(Card card) {
 		
+		ArrayList<Card> relevantColor;
+		
 		switch (card.getColor()) {
+		
 			case BLUE:
-				
+				relevantColor = blues;
 				break;
 				
 			case GREEN:
-				
+				relevantColor = 
 				break;
 				
 			case RED:
