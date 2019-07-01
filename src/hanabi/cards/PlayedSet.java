@@ -14,6 +14,36 @@ public class PlayedSet {
 	
 	public Boolean playableCheck(Card card) {
 		
+		switch (card.getColor()) {
+			case BLUE:
+				
+				break;
+				
+			case GREEN:
+				
+				break;
+				
+			case RED:
+				
+				break;
+				
+			case WHITE:
+				
+				break;
+				
+			case YELLOW:
+				
+				break;
+				
+			case MULTICOLOR:
+				
+				break;
+			
+		}
 	}
+	
+	//TODO play success
+	//TODO play fail
+	
 
 }
