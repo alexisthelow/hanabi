@@ -5,5 +5,7 @@ public class Card {
 	private Color color;
 	
 	private Suit suit;
+	
+	
 
 }
