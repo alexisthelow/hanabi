@@ -15,6 +15,7 @@ public class Game {
 	private ArrayList<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	private Deck deck;
 	private PlayedSet playedSet;
+	private int clocks;
 	
 	public Boolean processPlayedCard(Card card) throws Exception {
 		
@@ -53,10 +54,20 @@ public class Game {
 		
 		if(card.getSuit().getNumeral()==relevantColor.size() + 1) {
 			relevantColor.add(card);
+			//TODO should regain clock if card was a 5
+			return true; // play was successful
 		}
 		else {
 			//TODO the check has failed, a fuse should be lost, and the card added to the discard pile
 		}
+	}
+	
+	public Boolean gainClock() {
+		if (this.clocks < 8) {
+			this.clocks++;
+			return true;
+		}
+		return false;
 	}
 	
 }
