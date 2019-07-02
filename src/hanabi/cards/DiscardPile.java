@@ -11,7 +11,7 @@ public class DiscardPile {
 	private ArrayList<Card> yellows;
 	private ArrayList<Card> multicolors;
 	
-	public Boolean acceptDiscard(Card card) throws Exception {
+	public Boolean processDiscard(Card card) throws Exception {
 		
 		ArrayList<Card> relevantDiscardPile;
 		switch (card.getColor()) {
