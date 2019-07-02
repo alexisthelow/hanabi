@@ -29,7 +29,11 @@ public class AbstractPlayer {
 		
 		return playedCard;
 	}
+	
 	//TODO draw card
+	public void gainCardToHand(Card card) {
+		this.hand.add(card);
+	}
 	//TODO receive and interpret info
 	//TODO deduce from visible cards
 	//TODO give info
