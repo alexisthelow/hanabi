@@ -68,10 +68,10 @@ public class Game {
 			if (card.getSuit().getNumeral() == 5) {
 				gainClock();
 			}
+			//TODO notify players to update GlobalCardTrackers
 			return true; // play was successful
 		}
 		else {
-			//TODO the check has failed, a fuse should be lost, and the card added to the discard pile
 			burnFuse();
 			processDiscard(card);
 			return false;
@@ -112,6 +112,7 @@ public class Game {
 		
 		relevantDiscardPile.add(card);
 		//TODO sort here
+		//TODO notify players to update GlobalCardTrackers
 		return true;
 		
 	}
