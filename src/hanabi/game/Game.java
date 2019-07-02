@@ -16,6 +16,8 @@ public class Game {
 	private Deck deck;
 	private PlayedSet playedSet;
 	private int clocks;
+	private int fuses;
+	private Boolean gameOver;
 	
 	public Boolean processPlayedCard(Card card) throws Exception {
 		
@@ -55,6 +57,9 @@ public class Game {
 		if(card.getSuit().getNumeral()==relevantColor.size() + 1) {
 			relevantColor.add(card);
 			//TODO should regain clock if card was a 5
+			if (card.getSuit().getNumeral() == 5) {
+				gainClock();
+			}
 			return true; // play was successful
 		}
 		else {
@@ -75,6 +80,15 @@ public class Game {
 			this.clocks--;
 			return true;
 		}
+		return false;
+	}
+	
+	public Boolean burnFuse() {
+		if (this.fuses > 0) {
+			this.fuses--;
+			return true;
+		}
+		this.gameOver = true;
 		return false;
 	}
 	
