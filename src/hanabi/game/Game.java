@@ -70,4 +70,12 @@ public class Game {
 		return false;
 	}
 	
+	public Boolean payClock() {
+		if (this.clocks > 0) {
+			this.clocks--;
+			return true;
+		}
+		return false;
+	}
+	
 }
