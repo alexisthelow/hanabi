@@ -30,7 +30,6 @@ public class AbstractPlayer {
 		return playedCard;
 	}
 	
-	//TODO draw card
 	public void gainCardToHand(Card card) {
 		this.hand.add(card);
 	}

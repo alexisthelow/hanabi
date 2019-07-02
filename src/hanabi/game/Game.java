@@ -28,7 +28,7 @@ public class Game {
 	//states
 	private Boolean gameOver;
 	
-	public Boolean processPlayedCard(Card card) throws Exception {
+	public Boolean processPlayedCard(AbstractPlayer player, Card card) throws Exception {
 		
 		ArrayList<Card> relevantColor;
 		
