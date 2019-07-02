@@ -21,6 +21,8 @@ public class DiscardPile {
 		this.multicolors = new ArrayList<Card>();
 	}
 	
+	//TODO add sorter
+	
 	public ArrayList<Card> getBlues() {
 		return blues;
 	}

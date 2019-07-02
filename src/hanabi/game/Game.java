@@ -4,19 +4,28 @@ import java.util.ArrayList;
 
 import hanabi.cards.Card;
 import hanabi.cards.Deck;
+import hanabi.cards.DiscardPile;
 import hanabi.cards.PlayedSet;
 
 public class Game {
 	
+	//options
 	private Boolean variantOne = false;
 	private Boolean variantTwo = false;
 	private Boolean variantThree = false;
 	private Boolean variantFour = false;
-	private ArrayList<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
+	
+	//card locations
 	private Deck deck;
 	private PlayedSet playedSet;
+	private DiscardPile discardPile;
+	
+	//resources
+	private ArrayList<AbstractPlayer> players = new ArrayList<AbstractPlayer>();
 	private int clocks;
 	private int fuses;
+	
+	//states
 	private Boolean gameOver;
 	
 	public Boolean processPlayedCard(Card card) throws Exception {
@@ -56,7 +65,6 @@ public class Game {
 		
 		if(card.getSuit().getNumeral()==relevantColor.size() + 1) {
 			relevantColor.add(card);
-			//TODO should regain clock if card was a 5
 			if (card.getSuit().getNumeral() == 5) {
 				gainClock();
 			}
@@ -64,6 +72,9 @@ public class Game {
 		}
 		else {
 			//TODO the check has failed, a fuse should be lost, and the card added to the discard pile
+			burnFuse();
+			processDiscard(card);
+			return false;
 		}
 	}
 	
@@ -72,34 +83,36 @@ public class Game {
 		ArrayList<Card> relevantDiscardPile;
 		switch (card.getColor()) {
 			case BLUE:
-				relevantDiscardPile = blues;
+				relevantDiscardPile = this.discardPile.getBlues();
 				break;
 	
 			case GREEN:
-				relevantDiscardPile = greens;
+				relevantDiscardPile = this.discardPile.getGreens();
 				break;
 	
 			case RED:
-				relevantDiscardPile = reds;
+				relevantDiscardPile = this.discardPile.getReds();
 				break;
 	
 			case WHITE:
-				relevantDiscardPile = whites;
+				relevantDiscardPile = this.discardPile.getWhites();
 				break;
 	
 			case YELLOW:
-				relevantDiscardPile = yellows;
+				relevantDiscardPile = this.discardPile.getYellows();
 				break;
 	
 			case MULTICOLOR:
-				relevantDiscardPile = multicolors;
+				relevantDiscardPile = this.discardPile.getMulticolors();
 				break;
 				
 			default:
 				throw new Exception("DiscardPile.acceptDiscard was unable to locate the correct discard pile for " + card.toString());
 		}
-		relevantDiscardPile.add(card);
 		
+		relevantDiscardPile.add(card);
+		//TODO sort here
+		return true;
 		
 	}
 	
