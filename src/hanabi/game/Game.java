@@ -107,7 +107,7 @@ public class Game {
 				break;
 				
 			default:
-				throw new Exception("DiscardPile.acceptDiscard was unable to locate the correct discard pile for " + card.toString());
+				throw new Exception("Game.processDiscard was unable to locate the correct discard pile for " + card.toString());
 		}
 		
 		relevantDiscardPile.add(card);
