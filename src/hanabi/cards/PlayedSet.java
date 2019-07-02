@@ -11,52 +11,28 @@ public class PlayedSet {
 	private ArrayList<Card> yellows = new ArrayList<Card>();
 	private ArrayList<Card> multicolors = new ArrayList<Card>();
 	
-	
-	public Boolean playableCheck(Card card) throws Exception {
-		
-		ArrayList<Card> relevantColor;
-		
-		switch (card.getColor()) {
-		
-			case BLUE:
-				relevantColor = blues;
-				break;
-				
-			case GREEN:
-				relevantColor = greens;
-				break;
-				
-			case RED:
-				relevantColor = reds;
-				break;
-				
-			case WHITE:
-				relevantColor = whites;
-				break;
-				
-			case YELLOW:
-				relevantColor = yellows;
-				break;
-				
-			case MULTICOLOR:
-				relevantColor = multicolors;
-				break;
-			default:
-				throw new Exception("PlayedSet.playableCheck: couldn't find correct card array for card " + card.getColor() + card.getSuit().getNumeral());
-				break;
-			
-		}
-		
-		if(card.getSuit().getNumeral()==relevantColor.size() + 1) {
-			relevantColor.add(card);
-		}
-		else {
-			//TODO the check has failed, a fuse should be lost, and the card added to the discard pile
-		}
+	public ArrayList<Card> getBlues() {
+		return blues;
+	}
+	public ArrayList<Card> getGreens() {
+		return greens;
+	}
+	public ArrayList<Card> getReds() {
+		return reds;
+	}
+	public ArrayList<Card> getWhites() {
+		return whites;
+	}
+	public ArrayList<Card> getYellows() {
+		return yellows;
+	}
+	public ArrayList<Card> getMulticolors() {
+		return multicolors;
 	}
 	
-	//TODO play success
-	//TODO play fail
+	
+	
+	
 	
 
 }
