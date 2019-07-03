@@ -41,8 +41,7 @@ public class GlobalCardTracker {
 		}
 	}
 	
-	
-	
-	//TODO eliminateCard(Card card);
+	public void cardSeen(Card card) {
+	}
 
 }
