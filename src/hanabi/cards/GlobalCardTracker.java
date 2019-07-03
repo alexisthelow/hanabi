@@ -6,7 +6,7 @@ public class GlobalCardTracker {
 	
 	JTable cards;
 
-	public GlobalCardTracker() {
+	public GlobalCardTracker(Boolean variantActive) {
 		super();
 		String[] columnNames = {"Blue", "Green", "Red", "White", "Yellow", "Multicolor"};
 		Integer[][] rowData = {

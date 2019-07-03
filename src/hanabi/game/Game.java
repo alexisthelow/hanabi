@@ -10,10 +10,10 @@ import hanabi.cards.PlayedSet;
 public class Game {
 	
 	//options
-	private Boolean variantOne = false;
-	private Boolean variantTwo = false;
-	private Boolean variantThree = false;
-	private Boolean variantFour = false;
+	private Boolean variantGrandFinale = false; // continue play until all fireworks are complete (win) OR a necessary card is discarded (lose)
+	private Boolean variantAvalancheOfColors = false; //add all multicolors, indicate as separate color
+	private Boolean variantAvalancheOfColorsSingle = false; // add one of each multicolor, indicate as separate color
+	private Boolean variantAvalancheOfColorsWild = false; // add all multicolors, indicate as wild color
 	
 	//card locations
 	private Deck deck;
@@ -68,6 +68,8 @@ public class Game {
 			if (card.getSuit().getNumeral() == 5) {
 				gainClock();
 			}
+			
+			
 			//TODO notify players to update GlobalCardTrackers
 			return true; // play was successful
 		}
