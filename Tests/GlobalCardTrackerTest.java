@@ -19,7 +19,7 @@ class GlobalCardTrackerTest {
 	}
 
 	@Test
-	void test() {
+	void test_toString() {
 		System.out.println(gct.toString());
 	}
 
