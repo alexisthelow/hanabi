@@ -1,43 +1,68 @@
 package hanabi.cards;
 
-import javax.swing.JTable;
 
 public class GlobalCardTracker {
 	
-	JTable cards;
+	Integer[][] cards = new Integer[5][6];
 
 	public GlobalCardTracker(int colorVariant) {
 		super();
-		String[] columnNames = {"Blue", "Green", "Red", "White", "Yellow", "Multicolor"};
 		if (colorVariant == 0 || colorVariant > 3) { // no color variant
-			Integer[][] rowData = {
-					{3, 3, 3, 3, 3, 0},
-					{2, 2, 2, 2, 2, 0},
-					{2, 2, 2, 2, 2, 0},
-					{2, 2, 2, 2, 2, 0},
-					{1, 1, 1, 1, 1, 0}
-			};
-			this.cards = new JTable(rowData, columnNames);
+			for (int i = 0; i < cards.length; i++) {
+				if (i == 0) { //ones
+					for (int j = 0; j < cards[i].length - 1; j++) {
+						cards[i][j] = 3;
+					}
+				}
+				else if (i > 0 && i < 4) { // twos, threes, fours
+					for (int j = 0; j < cards[i].length - 1; j++) {
+						cards[i][j] = 2;
+					}
+				}
+				else { //fives
+					for (int j = 0; j < cards[i].length - 1; j++) {
+						cards[i][j] = 3;
+					}
+				}
+			}
+			
+			//ones
+			cards[0][0] = 3;
+			cards[0][1] = 3;
+			cards[0][2] = 3;
+			cards[0][3] = 3;
+			cards[0][4] = 3;
+			
+			//twos
+			cards[1][0] = 2;
+			cards[1][1] = 2;
+			cards[1][2] = 2;
+			cards[1][3] = 2;
+			cards[1][4] = 2;
+			
+			//threes
+			cards[2][0] = 2;
+			cards[2][1] = 2;
+			cards[2][2] = 2;
+			cards[2][3] = 2;
+			cards[2][4] = 2;
+			
+			//fours
+			cards[3][0] = 2;
+			cards[3][1] = 2;
+			cards[3][2] = 2;
+			cards[3][3] = 2;
+			cards[3][4] = 2;
+			
+			//fives
+
+
 		}
 		else if (colorVariant == 1 || colorVariant == 3) { // avalanche or wild
-			Integer[][] rowData = {
-					{3, 3, 3, 3, 3, 3},
-					{2, 2, 2, 2, 2, 3},
-					{2, 2, 2, 2, 2, 3},
-					{2, 2, 2, 2, 2, 3},
-					{1, 1, 1, 1, 1, 3}
-			};
-			this.cards = new JTable(rowData, columnNames);
+
 		}
 		else  { // avalanche single
-			Integer[][] rowData = {
-					{3, 3, 3, 3, 3, 1},
-					{2, 2, 2, 2, 2, 1},
-					{2, 2, 2, 2, 2, 1},
-					{2, 2, 2, 2, 2, 1},
-					{1, 1, 1, 1, 1, 1}
-			};
-			this.cards = new JTable(rowData, columnNames);
+
 		}
 	}
 	
