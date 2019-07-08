@@ -10,7 +10,7 @@ class GlobalCardTrackerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		gct = new GlobalCardTracker(0);
+		gct = new GlobalCardTracker(2);
 	}
 
 	@AfterEach
