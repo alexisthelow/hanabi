@@ -68,5 +68,16 @@ public class GlobalCardTracker {
 	
 	public void cardSeen(Card card) {
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("    | Blue | Green | Red | White | Yellow | Multicolor |\n")
+		.append("Ones: " + cards[0][0] + "  " + cards[0][1] + "  " + cards[0][2] + "  " + cards[0][3] + "  " + cards[0][4] + "  " + cards[0][5] + "\n")
+		.append("Twos: " + cards[1][0] + "  " + cards[1][1] + "  " + cards[1][2] + "  " + cards[1][3] + "  " + cards[1][4] + "  " + cards[1][5] + "\n")
+		.append("Threes: " + cards[2][0] + "  " + cards[2][1] + "  " + cards[2][2] + "  " + cards[2][3] + "  " + cards[2][4] + "  " + cards[2][5] + "\n")
+		.append("Fours: " + cards[3][0] + "  " + cards[3][1] + "  " + cards[3][2] + "  " + cards[3][3] + "  " + cards[3][4] + "  " + cards[3][5] + "\n")
+		.append("Fives: " + cards[4][0] + "  " + cards[4][1] + "  " + cards[4][2] + "  " + cards[4][3] + "  " + cards[4][4] + "  " + cards[4][5]);
+		return sb.toString();
+	}
 
 }
