@@ -25,11 +25,9 @@ public class GlobalCardTracker {
 					}
 				}
 			}
-			cards[0][5] = 0;
-			cards[1][5] = 0;
-			cards[2][5] = 0;
-			cards[3][5] = 0;
-			cards[4][5] = 0;
+			for (int i = 0; i < 5; i++) {
+				cards[i][5] = 0;
+			}
 			
 		}
 		else if (colorVariant == 1 || colorVariant == 3) { // avalanche or wild
