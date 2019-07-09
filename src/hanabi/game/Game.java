@@ -144,4 +144,16 @@ public class Game {
 		return false;
 	}
 	
+	public void notifyPlayers(Card card) {
+		//for each player, get their globalCardTracker and run cardSeen()
+		for (AbstractPlayer player : players) {
+			try {
+				player.getGlobalCardTracker().cardSeen(card);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }
