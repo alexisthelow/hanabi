@@ -114,7 +114,7 @@ public class Game {
 		
 		relevantDiscardPile.add(card);
 		//TODO sort here
-		//TODO notify players to update GlobalCardTrackers
+		//TODO notify discarding player to update GlobalCardTracker
 		return true;
 		
 	}
@@ -144,7 +144,10 @@ public class Game {
 		return false;
 	}
 	
-	public void notifyPlayers(Card card) {
+	
+	//on draw, everyone but the drawing player sees the card
+	//on discard / play, the discarding/playing player sees the card
+	public void notifyPlayers(Card card) { //TODO this should notify a single player specified by an argument
 		//for each player, get their globalCardTracker and run cardSeen()
 		for (AbstractPlayer player : players) {
 			try {
