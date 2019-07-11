@@ -147,7 +147,7 @@ public class Game {
 	
 	//on draw, everyone but the drawing player sees the card
 	//on discard / play, the discarding/playing player sees the card
-	public void notifyPlayers(Card card) { //TODO this should notify a single player specified by an argument
+	public void notifyPlayersOnDraw(Card card) { //TODO this should notify a single player specified by an argument
 		//for each player, get their globalCardTracker and run cardSeen()
 		for (AbstractPlayer player : players) {
 			try {
@@ -157,6 +157,10 @@ public class Game {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void notifyPlayerOnDiscard(Player player, Card card) {
+		
 	}
 	
 }
