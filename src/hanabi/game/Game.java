@@ -144,23 +144,29 @@ public class Game {
 		return false;
 	}
 	
-	
-	//on draw, everyone but the drawing player sees the card
-	//on discard / play, the discarding/playing player sees the card
-	public void notifyPlayersOnDraw(Card card) { //TODO this should notify a single player specified by an argument
-		//for each player, get their globalCardTracker and run cardSeen()
+	public void notifyPlayersOnDraw(AbstractPlayer drawingPlayer, Card card) {
+		
+		//for each player that is not the drawing player, get their globalCardTracker and run cardSeen()
 		for (AbstractPlayer player : players) {
-			try {
-				player.getGlobalCardTracker().cardSeen(card);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (player != drawingPlayer) {
+				try {
+					player.getGlobalCardTracker().cardSeen(card);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}
+				
 			}
 		}
 	}
 	
-	public void notifyPlayerOnDiscard(Player player, Card card) {
-		
+	public void notifyPlayerOnDiscard(AbstractPlayer discardingPlayer, Card card) {
+		try {
+			discardingPlayer.getGlobalCardTracker().cardSeen(card);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 }
