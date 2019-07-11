@@ -23,10 +23,10 @@ class GlobalCardTrackerTest {
 		gct = null;
 	}
 
-//	@Test
-//	void test_toString() {
-//		System.out.println(gct.toString());
-//	}
+	@Test
+	void test_toString() {
+		System.out.println(gct.toString());
+	}
 	
 	@Test
 	void test_decrement_correct_cell() {
