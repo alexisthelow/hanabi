@@ -5,6 +5,12 @@ public class Card {
 	private Color color;
 	
 	private Suit suit;
+	
+	public Card(Color color, Suit suit) {
+		super();
+		this.color = color;
+		this.suit = suit;
+	}
 
 	public Color getColor() {
 		return color;

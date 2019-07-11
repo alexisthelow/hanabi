@@ -99,14 +99,19 @@ public class GlobalCardTracker {
 			
 			case MULTICOLOR:
 				colorIndex = 5;
+				break;
 	
 			default:
 				throw new Exception("GlobalCardTracker.cardSeen() was unable to find the correct color for card " + card.toString());
 		}
 		
-		cards[colorIndex][card.getSuit().getNumeral()]--;
+		cards[card.getSuit().getNumeral() - 1][colorIndex]--;
 	}
 	
+	public Integer[][] getCards() {
+		return cards;
+	}
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("       | Blue | Green | Red | White | Yellow | Multicolor |\n")
