@@ -160,8 +160,10 @@ public class Game {
 		}
 	}
 	
-	//TODO this should not run if the player has deduced the identity of the card prior to discarding
 	public void notifyPlayerOnDiscardOrPlay(AbstractPlayer player, Card card) {
+		if (card.getOwningPlayerDeducedIdentity()) {
+			return;
+		}
 		try {
 			player.getGlobalCardTracker().cardSeen(card);
 		} catch (Exception e) {
