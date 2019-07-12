@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 
 import hanabi.cards.Card;
+import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
+import hanabi.cards.Suit;
 import hanabi.cards.ThreeState;
 
 public class AbstractPlayer {
@@ -36,7 +38,28 @@ public class AbstractPlayer {
 	public void gainCardToHand(Card card) {
 		this.hand.add(card);
 	}
+	
 	//TODO receive and interpret info
+	
+	
+	public void receiveColorInfo(ArrayList<Integer> handIndices, Color color) {
+		ArrayList<JTable> indicatedCards = new ArrayList<JTable>();
+		ArrayList<JTable> notIndicatedCards = new ArrayList<JTable>();
+		
+		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
+			if (handIndices.contains(i)) {
+				indicatedCards.add(this.cardInfoTables.get(i));
+			}
+			else {
+				notIndicatedCards.add(this.cardInfoTables.get(i));
+			}
+		}
+			
+	}
+	
+	public void receiveSuitInfo(int[] handIndex, Suit suit) {
+		
+	}
 	//TODO deduce from visible cards
 	//TODO give info
 	//TODO discard
