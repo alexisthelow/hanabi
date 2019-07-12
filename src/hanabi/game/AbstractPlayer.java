@@ -8,12 +8,12 @@ import hanabi.cards.Card;
 import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.Suit;
-import hanabi.cards.ThreeState;
+import hanabi.cards.FourState;
 
 public class AbstractPlayer {
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	private ArrayList<ThreeState[][]> cardInfoTables = new ArrayList<ThreeState[][]>();
+	private ArrayList<FourState[][]> cardInfoTables = new ArrayList<FourState[][]>();
 	private GlobalCardTracker globalCardTracker;
 
 
@@ -42,8 +42,8 @@ public class AbstractPlayer {
 	
 	
 	public void receiveColorInfo(ArrayList<Integer> handIndices, Color color) {
-		ArrayList<ThreeState[][]> indicatedCards = new ArrayList<ThreeState[][]>();
-		ArrayList<ThreeState[][]> notIndicatedCards = new ArrayList<ThreeState[][]>();
+		ArrayList<FourState[][]> indicatedCards = new ArrayList<FourState[][]>();
+		ArrayList<FourState[][]> notIndicatedCards = new ArrayList<FourState[][]>();
 		
 		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
 			if (handIndices.contains(i)) {
@@ -53,8 +53,17 @@ public class AbstractPlayer {
 				notIndicatedCards.add(this.cardInfoTables.get(i));
 			}
 		}
-		for (ThreeState[][] cardTable : indicatedCards) {
-			
+		for (FourState[][] cardTable : indicatedCards) {
+			for (int i = 0; i < cardTable.length; i++) {
+				for (int j = 0; j < cardTable[i].length; j++) {
+					if (j == color.getValue() - 1) {
+						cardTable[i][j] = FourState.MAYBE;
+					}
+					else {
+						cardTable[i][j] = FourState.NO;
+					}
+				}
+			}
 		}
 			
 	}
@@ -66,14 +75,14 @@ public class AbstractPlayer {
 	//TODO give info
 	//TODO discard
 	
-	public ThreeState[][] getNewCardInfoTable() {
+	public FourState[][] getNewCardInfoTable() {
 		
-		ThreeState[][] cardTable = {
-				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
-				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
-				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
-				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
-				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
+		FourState[][] cardTable = {
+				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
+				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
+				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
+				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
+				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
 		};
 		
 		return cardTable;
@@ -88,11 +97,11 @@ public class AbstractPlayer {
 		this.hand = hand;
 	}
 
-	public ArrayList<ThreeState[][]> getCardInfoTables() {
+	public ArrayList<FourState[][]> getCardInfoTables() {
 		return cardInfoTables;
 	}
 
-	public void setCardInfoTables(ArrayList<ThreeState[][]> cardInfoTables) {
+	public void setCardInfoTables(ArrayList<FourState[][]> cardInfoTables) {
 		this.cardInfoTables = cardInfoTables;
 	}
 

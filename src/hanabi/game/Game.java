@@ -11,9 +11,8 @@ public class Game {
 	
 	//options
 	private Boolean variantGrandFinale = false; // continue play until all fireworks are complete (win) OR a necessary card is discarded (lose)
-	private Boolean variantAvalancheOfColors = false; //add all multicolors, indicate as separate color
-	private Boolean variantAvalancheOfColorsSingle = false; // add one of each multicolor, indicate as separate color
-	private Boolean variantAvalancheOfColorsWild = false; // add all multicolors, indicate as wild color
+	private ColorVariant colorVariant;
+	
 	
 	//card locations
 	private Deck deck;

@@ -1,13 +1,14 @@
 package hanabi.cards;
 
+import hanabi.game.ColorVariant;
 
 public class GlobalCardTracker {
 	
 	Integer[][] cards = new Integer[5][6];
 
-	public GlobalCardTracker(int colorVariant) {
+	public GlobalCardTracker(ColorVariant colorVariant) {
 		super();
-		if (colorVariant == 0 || colorVariant > 3) { // no color variant
+		if (colorVariant.equals(ColorVariant.NONE)) { // no color variant
 			for (int i = 0; i < cards.length; i++) {
 				if (i == 0) { //ones
 					for (int j = 0; j < cards[i].length - 1; j++) {
@@ -30,7 +31,7 @@ public class GlobalCardTracker {
 			}
 			
 		}
-		else if (colorVariant == 1 || colorVariant == 3) { // avalanche or wild
+		else if (colorVariant.equals(ColorVariant.MULTICOLOR) || colorVariant.equals(ColorVariant.MULTICOLOR_WILD)) { // avalanche or wild
 			for (int i = 0; i < cards.length; i++) {
 				if (i == 0) { //ones
 					for (int j = 0; j < cards[i].length; j++) {
