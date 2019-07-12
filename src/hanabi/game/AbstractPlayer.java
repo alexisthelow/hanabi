@@ -13,14 +13,13 @@ import hanabi.cards.ThreeState;
 public class AbstractPlayer {
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	private ArrayList<JTable> cardInfoTables = new ArrayList<JTable>();
+	private ArrayList<ThreeState[][]> cardInfoTables = new ArrayList<ThreeState[][]>();
 	private GlobalCardTracker globalCardTracker;
 
 
-	public AbstractPlayer(ArrayList<Card> hand, ArrayList<JTable> cardInfoTables, int colorVariant) {
+	public AbstractPlayer(ArrayList<Card> hand, int colorVariant) {
 		super();
 		this.hand = hand;
-		this.cardInfoTables = cardInfoTables;
 		this.globalCardTracker = new GlobalCardTracker(colorVariant);
 		
 		for (Card c : hand) {
@@ -43,8 +42,8 @@ public class AbstractPlayer {
 	
 	
 	public void receiveColorInfo(ArrayList<Integer> handIndices, Color color) {
-		ArrayList<JTable> indicatedCards = new ArrayList<JTable>();
-		ArrayList<JTable> notIndicatedCards = new ArrayList<JTable>();
+		ArrayList<ThreeState[][]> indicatedCards = new ArrayList<ThreeState[][]>();
+		ArrayList<ThreeState[][]> notIndicatedCards = new ArrayList<ThreeState[][]>();
 		
 		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
 			if (handIndices.contains(i)) {
@@ -53,6 +52,9 @@ public class AbstractPlayer {
 			else {
 				notIndicatedCards.add(this.cardInfoTables.get(i));
 			}
+		}
+		for (ThreeState[][] cardTable : indicatedCards) {
+			
 		}
 			
 	}
@@ -64,11 +66,9 @@ public class AbstractPlayer {
 	//TODO give info
 	//TODO discard
 	
-	public JTable getNewCardInfoTable() {
+	public ThreeState[][] getNewCardInfoTable() {
 		
-		String[] columnNames = {"Blue", "Green", "Red", "White", "Yellow", "Multicolor"};
-		
-		ThreeState[][] rowData = {
+		ThreeState[][] cardTable = {
 				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
@@ -76,7 +76,7 @@ public class AbstractPlayer {
 				{ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE, ThreeState.MAYBE}, 
 		};
 		
-		return new JTable(rowData, columnNames);
+		return cardTable;
 		
 	}
 
@@ -88,11 +88,11 @@ public class AbstractPlayer {
 		this.hand = hand;
 	}
 
-	public ArrayList<JTable> getCardInfoTables() {
+	public ArrayList<ThreeState[][]> getCardInfoTables() {
 		return cardInfoTables;
 	}
 
-	public void setCardInfoTables(ArrayList<JTable> cardInfoTables) {
+	public void setCardInfoTables(ArrayList<ThreeState[][]> cardInfoTables) {
 		this.cardInfoTables = cardInfoTables;
 	}
 
