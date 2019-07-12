@@ -17,7 +17,7 @@ public class AbstractPlayer {
 	private GlobalCardTracker globalCardTracker;
 
 
-	public AbstractPlayer(ArrayList<Card> hand, int colorVariant) {
+	public AbstractPlayer(ArrayList<Card> hand, ColorVariant colorVariant) {
 		super();
 		this.hand = hand;
 		this.globalCardTracker = new GlobalCardTracker(colorVariant);
@@ -54,16 +54,24 @@ public class AbstractPlayer {
 			}
 		}
 		for (FourState[][] cardTable : indicatedCards) {
+			
+			//TODO first check; what do we already know about the card? the game?
+			//TODO if there are no multicolors in the game, we don't need to worry and can simply check yes on the indicated color
 			for (int i = 0; i < cardTable.length; i++) {
 				for (int j = 0; j < cardTable[i].length; j++) {
 					if (j == color.getValue() - 1) {
-						cardTable[i][j] = FourState.MAYBE;
+						cardTable[i][j] = FourState.YES;
 					}
 					else {
 						cardTable[i][j] = FourState.NO;
 					}
 				}
 			}
+			//if there are multicolors:
+			//are we indicating multicolors separately or together with other cards?
+			//if we already have a maybe for a color, and it's indicated again, it's definitely that color
+			//if we have a maybe for a color and a different color is indicated, it is certainly multicolor
+			
 		}
 			
 	}
@@ -78,11 +86,11 @@ public class AbstractPlayer {
 	public FourState[][] getNewCardInfoTable() {
 		
 		FourState[][] cardTable = {
-				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
-				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
-				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
-				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
-				{FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE, FourState.MAYBE}, 
+				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
+				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
+				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
+				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
+				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
 		};
 		
 		return cardTable;

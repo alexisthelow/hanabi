@@ -8,6 +8,7 @@ import hanabi.cards.Card;
 import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.Suit;
+import hanabi.game.ColorVariant;
 
 class GlobalCardTrackerTest {
 	
@@ -15,7 +16,7 @@ class GlobalCardTrackerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		gct = new GlobalCardTracker(2);
+		gct = new GlobalCardTracker(ColorVariant.MULTICOLOR);
 	}
 
 	@AfterEach
