@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import hanabi.cards.Card;
 import hanabi.cards.GlobalCardTracker;
-import hanabi.cards.identifiers.Color;
+import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.Suit;
 import hanabi.cards.identifiers.SuitColorTracker;
 
@@ -39,7 +39,7 @@ public class AbstractPlayer {
 	//TODO receive and interpret info
 	
 	
-	public void receiveColorInfo(ArrayList<Integer> handIndices, Color color, ColorVariant colorVariant) {
+	public void receiveColorInfo(ArrayList<Integer> handIndices, CardAttribute attribute, ColorVariant colorVariant) {
 		ArrayList<SuitColorTracker[][]> indicatedCards = new ArrayList<SuitColorTracker[][]>();
 		ArrayList<SuitColorTracker[][]> notIndicatedCards = new ArrayList<SuitColorTracker[][]>();
 		
