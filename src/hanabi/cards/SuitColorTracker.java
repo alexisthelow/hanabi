@@ -1,0 +1,7 @@
+package hanabi.cards;
+
+public enum SuitColorTracker {
+	
+	UNKNOWN, COLOR_TRUE, COLOR_POSSIBLE, COLOR_FALSE, SUIT_TRUE, SUIT_POSSIBLE, SUIT_FALSE, BOTH_TRUE, BOTH_POSSIBLE, BOTH_FALSE
+
+}

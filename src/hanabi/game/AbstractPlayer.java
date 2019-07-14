@@ -8,12 +8,12 @@ import hanabi.cards.Card;
 import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.Suit;
-import hanabi.cards.FourState;
+import hanabi.cards.SuitColorTracker;
 
 public class AbstractPlayer {
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	private ArrayList<FourState[][]> cardInfoTables = new ArrayList<FourState[][]>();
+	private ArrayList<SuitColorTracker[][]> cardInfoTables = new ArrayList<SuitColorTracker[][]>();
 	private GlobalCardTracker globalCardTracker;
 
 
@@ -42,8 +42,8 @@ public class AbstractPlayer {
 	
 	
 	public void receiveColorInfo(ArrayList<Integer> handIndices, Color color, ColorVariant colorVariant) {
-		ArrayList<FourState[][]> indicatedCards = new ArrayList<FourState[][]>();
-		ArrayList<FourState[][]> notIndicatedCards = new ArrayList<FourState[][]>();
+		ArrayList<SuitColorTracker[][]> indicatedCards = new ArrayList<SuitColorTracker[][]>();
+		ArrayList<SuitColorTracker[][]> notIndicatedCards = new ArrayList<SuitColorTracker[][]>();
 		
 		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
 			if (handIndices.contains(i)) {
@@ -53,7 +53,7 @@ public class AbstractPlayer {
 				notIndicatedCards.add(this.cardInfoTables.get(i));
 			}
 		}
-		for (FourState[][] cardTable : indicatedCards) {
+		for (SuitColorTracker[][] cardTable : indicatedCards) {
 			
 			boolean multicolorFound = false;
 			for (int i = 0; i < globalCardTracker.getCards().length; i++) {
@@ -61,23 +61,34 @@ public class AbstractPlayer {
 					multicolorFound = true;
 				}
 			}
-			
-			if (multicolorFound) { // if there are no multicolors remaining in the game, we don't need to worry and can simply check yes on the indicated color
+			// if there are no multicolors remaining in the game (or they were never added) OR if multicolors are being indicated separately, we don't need to worry and can simply check maybe on the indicated color
+			if (multicolorFound || !colorVariant.equals(ColorVariant.MULTICOLOR_WILD)) { // no multicolors found or multicolors indicated separately
 				
 				for (int i = 0; i < cardTable.length; i++) {
 					for (int j = 0; j < cardTable[i].length; j++) {
 						if (j == color.getValue() - 1) {
-							cardTable[i][j] = FourState.YES;
+							cardTable[i][j] = SuitColorTracker.COLOR_TRUE;
 						} else {
-							cardTable[i][j] = FourState.NO;
+							cardTable[i][j] = SuitColorTracker.COLOR_FALSE;
 						}
 					}
 				}
 			}
-			//if there are multicolors:
-			//TODO are we indicating multicolors separately or together with other cards?
-			//TODO if we already have a maybe for a color, and it's indicated again, it's definitely that color
-			//TODO if we have a maybe for a non-multicolor color and a different color is indicated, it is certainly multicolor
+			//are we indicating multicolors separately or together with other cards?
+			else { //indicating together
+				//check what player knows about indicated card.
+				//TODO if we already have a COLOR_POSSIBLE for the indicated color, and it's indicated again, it's definitely that color
+				boolean colorPreviouslyIndicated = false;
+				for (int i = 0; i < cardTable.length; i++) {
+					if (cardTable[i][color.getValue() - 1].equals(SuitColorTracker.MAYBE)) { // at least one value in this column is maybe, so color has been previously indicated
+						colorPreviouslyIndicated = true;
+					}
+				}
+				
+				
+				//TODO if we have a maybe for a non-multicolor color and a different color is indicated, it is certainly multicolor
+				
+			}
 			
 		}
 			
@@ -90,14 +101,14 @@ public class AbstractPlayer {
 	//TODO give info
 	//TODO discard
 	
-	public FourState[][] getNewCardInfoTable() {
+	public SuitColorTracker[][] getNewCardInfoTable() {
 		
-		FourState[][] cardTable = {
-				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
-				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
-				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
-				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
-				{FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN, FourState.UNKNOWN}, 
+		SuitColorTracker[][] cardTable = {
+				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
+				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
+				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
+				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
+				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
 		};
 		
 		return cardTable;
@@ -112,11 +123,11 @@ public class AbstractPlayer {
 		this.hand = hand;
 	}
 
-	public ArrayList<FourState[][]> getCardInfoTables() {
+	public ArrayList<SuitColorTracker[][]> getCardInfoTables() {
 		return cardInfoTables;
 	}
 
-	public void setCardInfoTables(ArrayList<FourState[][]> cardInfoTables) {
+	public void setCardInfoTables(ArrayList<SuitColorTracker[][]> cardInfoTables) {
 		this.cardInfoTables = cardInfoTables;
 	}
 
