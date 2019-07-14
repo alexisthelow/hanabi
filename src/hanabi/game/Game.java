@@ -13,7 +13,6 @@ public class Game {
 	private Boolean variantGrandFinale = false; // continue play until all fireworks are complete (win) OR a necessary card is discarded (lose)
 	private ColorVariant colorVariant;
 	
-	
 	//card locations
 	private Deck deck;
 	private PlayedSet playedSet;
