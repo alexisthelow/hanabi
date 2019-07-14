@@ -1,6 +1,6 @@
-package hanabi.cards;
+package hanabi.cards.identifiers;
 
-public enum Color {
+public enum Color implements CardAttribute {
 	
 	RED("Red", 3), GREEN("Green", 2), YELLOW("Yellow", 4), BLUE("Blue", 1), WHITE("White", 5), MULTICOLOR("Multicolor", 6);
 	
@@ -18,6 +18,11 @@ public enum Color {
 
 	public int getValue() {
 		return value;
+	}
+
+	@Override
+	public String getAttributeType() {
+		return "color";
 	}
 	
 }

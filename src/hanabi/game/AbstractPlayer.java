@@ -2,13 +2,11 @@ package hanabi.game;
 
 import java.util.ArrayList;
 
-import javax.swing.JTable;
-
 import hanabi.cards.Card;
-import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
-import hanabi.cards.Suit;
-import hanabi.cards.SuitColorTracker;
+import hanabi.cards.identifiers.Color;
+import hanabi.cards.identifiers.Suit;
+import hanabi.cards.identifiers.SuitColorTracker;
 
 public class AbstractPlayer {
 	
@@ -80,7 +78,7 @@ public class AbstractPlayer {
 				//TODO if we already have a COLOR_POSSIBLE for the indicated color, and it's indicated again, it's definitely that color
 				boolean colorPreviouslyIndicated = false;
 				for (int i = 0; i < cardTable.length; i++) {
-					if (cardTable[i][color.getValue() - 1].equals(SuitColorTracker.MAYBE)) { // at least one value in this column is maybe, so color has been previously indicated
+					if (cardTable[i][color.getValue() - 1].equals(SuitColorTracker.COLOR_POSSIBLE)) { // at least one value in this column is COLOR_POSSIBLE, so color has been previously indicated
 						colorPreviouslyIndicated = true;
 					}
 				}

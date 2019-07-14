@@ -1,5 +1,8 @@
 package hanabi.cards;
 
+import hanabi.cards.identifiers.Color;
+import hanabi.cards.identifiers.Suit;
+
 public class Card {
 	
 	private Color color;

@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hanabi.cards.Card;
-import hanabi.cards.Color;
 import hanabi.cards.GlobalCardTracker;
-import hanabi.cards.Suit;
+import hanabi.cards.identifiers.Color;
+import hanabi.cards.identifiers.Suit;
 import hanabi.game.ColorVariant;
 
 class GlobalCardTrackerTest {

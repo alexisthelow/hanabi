@@ -1,4 +1,4 @@
-package hanabi.cards;
+package hanabi.cards.identifiers;
 
 public enum SuitColorTracker {
 	
