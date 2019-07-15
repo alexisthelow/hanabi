@@ -1,13 +1,13 @@
 package hanabi.cards.identifiers;
 
-public class IndicatedAttributeTracker {
+public class AttributeTracker {
 	
 	private FourState color;
-	private FourState suit;
+	private FourState number;
 	
-	public IndicatedAttributeTracker() {
+	public AttributeTracker() {
 		this.color = FourState.UNKNOWN;
-		this.suit = FourState.UNKNOWN;
+		this.number = FourState.UNKNOWN;
 	}
 
 	public FourState getColor() {
@@ -19,11 +19,11 @@ public class IndicatedAttributeTracker {
 	}
 
 	public FourState getSuit() {
-		return suit;
+		return number;
 	}
 
-	public void setSuit(FourState suit) {
-		this.suit = suit;
+	public void setSuit(FourState number) {
+		this.number = number;
 	}
 	
 }

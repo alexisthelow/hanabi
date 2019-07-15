@@ -1,15 +1,15 @@
 package hanabi.cards;
 
 import hanabi.cards.identifiers.Color;
-import hanabi.cards.identifiers.Suit;
+import hanabi.cards.identifiers.Number;
 
 public class Card {
 	
 	private Color color;
-	private Suit suit;
+	private Number suit;
 	private Boolean owningPlayerDeducedIdentity;
 	
-	public Card(Color color, Suit suit) {
+	public Card(Color color, Number suit) {
 		super();
 		this.color = color;
 		this.suit = suit;
@@ -24,11 +24,11 @@ public class Card {
 		this.color = color;
 	}
 
-	public Suit getSuit() {
+	public Number getSuit() {
 		return suit;
 	}
 
-	public void setSuit(Suit suit) {
+	public void setSuit(Number suit) {
 		this.suit = suit;
 	}
 	

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 import hanabi.cards.Card;
 import hanabi.cards.GlobalCardTracker;
+import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
-import hanabi.cards.identifiers.Suit;
-import hanabi.cards.identifiers.SuitColorTracker;
+import hanabi.cards.identifiers.Number;
 
 public class AbstractPlayer {
 	
 	private ArrayList<Card> hand = new ArrayList<Card>();
-	private ArrayList<SuitColorTracker[][]> cardInfoTables = new ArrayList<SuitColorTracker[][]>();
+	private ArrayList<AttributeTracker[][]> cardInfoTables = new ArrayList<AttributeTracker[][]>();
 	private GlobalCardTracker globalCardTracker;
 
 
@@ -40,8 +40,8 @@ public class AbstractPlayer {
 	
 	
 	public void receiveColorInfo(ArrayList<Integer> handIndices, CardAttribute attribute, ColorVariant colorVariant) {
-		ArrayList<SuitColorTracker[][]> indicatedCards = new ArrayList<SuitColorTracker[][]>();
-		ArrayList<SuitColorTracker[][]> notIndicatedCards = new ArrayList<SuitColorTracker[][]>();
+		ArrayList<AttributeTracker[][]> indicatedCards = new ArrayList<AttributeTracker[][]>();
+		ArrayList<AttributeTracker[][]> notIndicatedCards = new ArrayList<AttributeTracker[][]>();
 		
 		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
 			if (handIndices.contains(i)) {
@@ -51,7 +51,7 @@ public class AbstractPlayer {
 				notIndicatedCards.add(this.cardInfoTables.get(i));
 			}
 		}
-		for (SuitColorTracker[][] cardTable : indicatedCards) {
+		for (AttributeTracker[][] cardTable : indicatedCards) {
 			
 			boolean multicolorFound = false;
 			for (int i = 0; i < globalCardTracker.getCards().length; i++) {
@@ -92,22 +92,21 @@ public class AbstractPlayer {
 			
 	}
 	
-	public void receiveSuitInfo(int[] handIndex, Suit suit) {
+	public void receiveSuitInfo(int[] handIndex, Number suit) {
 		
 	}
 	//TODO deduce from visible cards
 	//TODO give info
 	//TODO discard
 	
-	public SuitColorTracker[][] getNewCardInfoTable() {
+	public AttributeTracker[][] getNewCardInfoTable() {
 		
-		SuitColorTracker[][] cardTable = {
-				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
-				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
-				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
-				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
-				{SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN, SuitColorTracker.UNKNOWN}, 
-		};
+		AttributeTracker[][] cardTable = new AttributeTracker[5][6];
+		for (int i = 0; i < cardTable.length; i++) {
+			for (int j = 0; j < cardTable[i].length; j++) {
+				cardTable[i][j] = new AttributeTracker();
+			}
+		}
 		
 		return cardTable;
 		

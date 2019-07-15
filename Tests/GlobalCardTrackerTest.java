@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import hanabi.cards.Card;
 import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.identifiers.Color;
-import hanabi.cards.identifiers.Suit;
+import hanabi.cards.identifiers.Number;
 import hanabi.game.ColorVariant;
 
 class GlobalCardTrackerTest {
@@ -32,7 +32,7 @@ class GlobalCardTrackerTest {
 	@Test
 	void test_decrement_correct_cell() {
 		try {
-			gct.cardSeen(new Card(Color.RED, Suit.FIVE));
+			gct.cardSeen(new Card(Color.RED, Number.FIVE));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

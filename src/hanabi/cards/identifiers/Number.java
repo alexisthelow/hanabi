@@ -1,14 +1,13 @@
 package hanabi.cards.identifiers;
 
-public enum Suit implements CardAttribute {
+public enum Number implements CardAttribute {
 	
 	ONE("One", 1), TWO("Two", 2), THREE("Three", 3), FOUR("Four", 4), FIVE("Five", 5);
 	
 	private String name;
-	
 	private int value;
 
-	private Suit(String name, int value) {
+	private Number(String name, int value) {
 		this.name = name;
 		this.value = value;
 	}
@@ -23,9 +22,7 @@ public enum Suit implements CardAttribute {
 
 	@Override
 	public String getAttributeType() {
-		return "suit";
+		return "number";
 	}
-	
-	
 	
 }
