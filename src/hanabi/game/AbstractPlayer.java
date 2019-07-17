@@ -58,16 +58,18 @@ public class AbstractPlayer {
 			for (AttributeTracker[][] cardTable : indicatedCards) { // for each indicated card
 				for (int i = 0; i < cardTable.length; i++) { // for each row
 					for (int j = 0; j < cardTable[i].length; j++) { // for each cell
-						cardTable[i][j].setNumber(FourState.NO); // set each to NO
+						if (i == attribute.getValue()) { // if it's the right row
+							cardTable[i][j].setNumber(FourState.YES); // set it to YES
+						}
+						else { // otherwise
+							cardTable[i][j].setNumber(FourState.NO); // set it to NO
+						}
 					}
 				}
-				for (int i = 0; i < cardTable[attribute.getValue() - 1].length; i++) { // on the relevant numbered row
-					cardTable[attribute.getValue() - 1][i].setNumber(FourState.YES); // set the number FourState to YES
-				}
 			}
-			for (AttributeTracker[][] cardTable : notIndicatedCards) {
+			for (AttributeTracker[][] cardTable : notIndicatedCards) { // for each non indicated card
 				for (int i = 0; i < cardTable[attribute.getValue() - 1].length; i++) {
-					cardTable[attribute.getValue() - 1][i].setNumber(FourState.NO);
+					cardTable[attribute.getValue() - 1][i].setNumber(FourState.NO); // set the relevant row to NO
 				}
 			}
 		}
@@ -93,10 +95,15 @@ public class AbstractPlayer {
 						for (int j = 0; j < cardTable[i].length; j++) {
 							if (cardTable[i][j].getColor().equals(FourState.MAYBE)) { // it has. does the newly indicated color match the old indicated color?
 								if (j == attribute.getValue() - 1) { // it does
-									
+									maybeFound = true;
 								}
 							}
 						}
+					}
+				}
+				for (AttributeTracker[][] cardTable : indicatedCards) {
+					for (int i = 0; i < cardTable.length; i++) {
+						
 					}
 				}
 				
