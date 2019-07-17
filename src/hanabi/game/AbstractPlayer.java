@@ -65,7 +65,6 @@ public class AbstractPlayer {
 					cardTable[attribute.getValue() - 1][i].setNumber(FourState.YES); // set the number FourState to YES
 				}
 			}
-			//TODO deal with the unindicated cards (for the given number, set that row to no)
 			for (AttributeTracker[][] cardTable : notIndicatedCards) {
 				for (int i = 0; i < cardTable[attribute.getValue() - 1].length; i++) {
 					cardTable[attribute.getValue() - 1][i].setNumber(FourState.NO);
@@ -73,8 +72,20 @@ public class AbstractPlayer {
 			}
 		}
 		else { // it's a color
+			
 			//TODO deal with indicated cards
-			//TODO deal with unindicated caarads
+				// what color variant are we playing with?
+				// if none OR if multicolors indicated separately, set the relevant column to yes
+				// if multicolor indicated together:
+					// has a color already been indicated on this card?
+						//if so, does the newly indicated color match the old indicated color? (check each value in relevant column for a maybe value)
+							//if so, set that column to yes and multicolor column to no
+							//if not, set that column to no and multicolor column to yes
+						//if not, set that column and multicolor column to maybe 
+			//TODO deal with unindicated cards
+				// multicolors indicated separately?
+					//if so, set relevant column to no
+					//if not, set relevant column AND multicolor column to no
 		}
 	}
 	
