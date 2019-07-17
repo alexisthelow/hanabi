@@ -18,11 +18,11 @@ public class AttributeTracker {
 		this.color = color;
 	}
 
-	public FourState getSuit() {
+	public FourState getNumber() {
 		return number;
 	}
 
-	public void setSuit(FourState number) {
+	public void setNumber(FourState number) {
 		this.number = number;
 	}
 	
