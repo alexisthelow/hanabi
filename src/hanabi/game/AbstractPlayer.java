@@ -72,16 +72,43 @@ public class AbstractPlayer {
 			}
 		}
 		else { // it's a color
-			
+
 			//TODO deal with indicated cards
-				// what color variant are we playing with?
-				// if none OR if multicolors indicated separately, set the relevant column to yes
-				// if multicolor indicated together:
-					// has a color already been indicated on this card?
-						//if so, does the newly indicated color match the old indicated color? (check each value in relevant column for a maybe value)
-							//if so, set that column to yes and multicolor column to no
-							//if not, set that column to no and multicolor column to yes
-						//if not, set that column and multicolor column to maybe 
+			// what color variant are we playing with?
+			if (!colorVariant.equals(ColorVariant.MULTICOLOR_WILD)) {// if multicolors not indicated together
+				// set the relevant column to yes
+				for (AttributeTracker[][] cardTable : indicatedCards) {
+					for (int i = 0; i < cardTable.length; i++) {
+						cardTable[i][attribute.getValue() - 1].setColor(FourState.YES);
+					}
+				}
+				
+			}
+			else { // if multicolor indicated together:
+				
+				// has a color already been indicated on this card? 
+				boolean maybeFound = false;
+				for (AttributeTracker[][] cardTable : indicatedCards) {
+					for (int i = 0; i < cardTable.length; i++) {
+						for (int j = 0; j < cardTable[i].length; j++) {
+							if (cardTable[i][j].getColor().equals(FourState.MAYBE)) { // it has. does the newly indicated color match the old indicated color?
+								if (j == attribute.getValue() - 1) { // it does
+									
+								}
+							}
+						}
+					}
+				}
+				
+					//if so, set that column to yes and multicolor column to no
+					//if not, set that column to no and multicolor column to yes
+				//if not, set that column and multicolor column to maybe 
+				
+			}
+
+				
+				
+					
 			//TODO deal with unindicated cards
 				// multicolors indicated separately?
 					//if so, set relevant column to no
