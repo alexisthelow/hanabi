@@ -144,7 +144,12 @@ public class AbstractPlayer {
 							}
 						}
 					}
-					
+					// indicated cards are complete
+				}
+				for (AttributeTracker[][] cardTable : notIndicatedCards) {
+					for (int i = 0; i < cardTable.length; i++) {
+						cardTable[i][attribute.getValue() - 1].setColor(FourState.NO);
+					}
 				}
 					
 					
