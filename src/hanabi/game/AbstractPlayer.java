@@ -94,28 +94,61 @@ public class AbstractPlayer {
 			}
 			else { // if multicolor indicated together:
 				
-				// has a color already been indicated on this card? 
-				boolean maybeFound = false;
-				for (AttributeTracker[][] cardTable : indicatedCards) {
-					for (int i = 0; i < cardTable.length; i++) {
+				
+				for (AttributeTracker[][] cardTable : indicatedCards) { // for each card
+					boolean maybeFoundMatchesOld = false;
+					boolean maybeFoundDoesNotMatchOld = false;
+					for (int i = 0; i < cardTable.length; i++) { // has a color already been indicated on this card? 
 						for (int j = 0; j < cardTable[i].length; j++) {
 							if (cardTable[i][j].getColor().equals(FourState.MAYBE)) { // it has. does the newly indicated color match the old indicated color?
 								if (j == attribute.getValue() - 1) { // it does
-									maybeFound = true;
+									maybeFoundMatchesOld = true;
 								}
 							}
 						}
 					}
-				}
-				if (maybeFound) {//if so, set that column to yes and multicolor column to no
+					if (maybeFoundMatchesOld) { // maybe was found in the same color column as the indicated color
+						for (int i = 0; i < cardTable.length; i++) {
+							for (int j = 0; j < cardTable[i].length; j++) { // set relevant column to yes and multicolor column to no
+								if (j == attribute.getValue() - 1) { 
+									cardTable[i][j].setColor(FourState.YES);
+								}
+								else {
+									cardTable[i][j].setColor(FourState.NO);
+								}
+							}
+						}
+						
+					}
+					else if (maybeFoundDoesNotMatchOld) { // maybe was found but it was not in the indicated color column 
+						for (int i = 0; i < cardTable.length; i++) {
+							for (int j = 0; j < cardTable[i].length; j++) { // set that column to no and multicolor column to yes
+								if (j == 5) { // five is the value of the multicolor column
+									cardTable[i][j].setColor(FourState.YES);
+								}
+								else {
+									cardTable[i][j].setColor(FourState.NO);
+								}
+							}
+						}
+					}
+					else { // no maybe found, so set that column and multicolor column to maybe 
+						for (int i = 0; i < cardTable.length; i++) {
+							for (int j = 0; j < cardTable[i].length; j++) {
+								if (j == attribute.getValue() - 1 || j == 5) {
+									cardTable[i][j].setColor(FourState.MAYBE);
+								}
+								else {
+									cardTable[i][j].setColor(FourState.NO);
+								}
+							}
+						}
+					}
 					
 				}
-				else {
 					
-				}
 					
-					//if not, set that column to no and multicolor column to yes
-				//if not, set that column and multicolor column to maybe 
+				
 				
 			}
 
