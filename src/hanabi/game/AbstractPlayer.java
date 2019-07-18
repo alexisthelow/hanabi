@@ -78,10 +78,16 @@ public class AbstractPlayer {
 			//TODO deal with indicated cards
 			// what color variant are we playing with?
 			if (!colorVariant.equals(ColorVariant.MULTICOLOR_WILD)) {// if multicolors not indicated together
-				// set the relevant column to yes
 				for (AttributeTracker[][] cardTable : indicatedCards) {
 					for (int i = 0; i < cardTable.length; i++) {
-						cardTable[i][attribute.getValue() - 1].setColor(FourState.YES);
+						for (int j = 0; j < cardTable[i].length; j++) {
+							if (j == attribute.getValue() - 1) { // set the relevant column to yes
+								cardTable[i][j].setColor(FourState.YES);
+							}
+							else { // and the others to no
+								cardTable[i][j].setColor(FourState.NO);
+							}
+						}
 					}
 				}
 				
@@ -101,13 +107,13 @@ public class AbstractPlayer {
 						}
 					}
 				}
-				for (AttributeTracker[][] cardTable : indicatedCards) {
-					for (int i = 0; i < cardTable.length; i++) {
-						
-					}
+				if (maybeFound) {//if so, set that column to yes and multicolor column to no
+					
 				}
-				
-					//if so, set that column to yes and multicolor column to no
+				else {
+					
+				}
+					
 					//if not, set that column to no and multicolor column to yes
 				//if not, set that column and multicolor column to maybe 
 				
