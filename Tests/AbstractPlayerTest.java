@@ -1,5 +1,3 @@
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
@@ -7,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hanabi.cards.Card;
+import hanabi.cards.identifiers.AttributeTracker;
+import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.Color;
 import hanabi.cards.identifiers.Number;
 import hanabi.game.AbstractPlayer;
@@ -37,7 +37,19 @@ class AbstractPlayerTest {
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		ArrayList<Integer> handIndices = new ArrayList<Integer>();
+		handIndices.add(0);
+		handIndices.add(2);
+		CardAttribute attribute = Number.ONE;
+		player.receiveInfo(handIndices, attribute, ColorVariant.MULTICOLOR);
+		for (AttributeTracker[][] cardTable : player.getCardInfoTables()) {
+			System.out.println(cardTable);
+			for (int i = 0; i < cardTable.length; i++) {
+				for (int j = 0; j < cardTable[i].length; j++) {
+					System.out.println(i + " " + j + " " + cardTable[i][j].getColor() + " " + cardTable[i][j].getNumber());
+				}
+			}
+		}
 	}
 
 }

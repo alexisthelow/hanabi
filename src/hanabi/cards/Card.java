@@ -7,13 +7,13 @@ public class Card {
 	
 	private Color color;
 	private Number suit;
-	private Boolean owningPlayerDeducedIdentity;
+	private Boolean ownerIdentified;
 	
 	public Card(Color color, Number suit) {
 		super();
 		this.color = color;
 		this.suit = suit;
-		this.owningPlayerDeducedIdentity = false;
+		this.ownerIdentified = false;
 	}
 
 	public Color getColor() {
@@ -33,11 +33,11 @@ public class Card {
 	}
 	
 	public Boolean getOwningPlayerDeducedIdentity() {
-		return owningPlayerDeducedIdentity;
+		return ownerIdentified;
 	}
 
 	public void setOwningPlayerDeducedIdentity(Boolean owningPlayerDeducedIdentity) {
-		this.owningPlayerDeducedIdentity = owningPlayerDeducedIdentity;
+		this.ownerIdentified = owningPlayerDeducedIdentity;
 	}
 
 	@Override

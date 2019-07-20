@@ -106,7 +106,7 @@ public class GlobalCardTracker {
 				throw new Exception("GlobalCardTracker.cardSeen() was unable to find the correct color for card " + card.toString());
 		}
 		
-		cards[card.getSuit().getNumeral() - 1][colorIndex]--;
+		cards[card.getSuit().getValue() - 1][colorIndex]--;
 	}
 	
 	public Integer[][] getCards() {

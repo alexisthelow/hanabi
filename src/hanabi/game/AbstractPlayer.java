@@ -58,7 +58,7 @@ public class AbstractPlayer {
 			for (AttributeTracker[][] cardTable : indicatedCards) { // for each indicated card
 				for (int i = 0; i < cardTable.length; i++) { // for each row
 					for (int j = 0; j < cardTable[i].length; j++) { // for each cell
-						if (i == attribute.getValue()) { // if it's the right row
+						if (i == attribute.getValue() - 1) { // if it's the right row
 							cardTable[i][j].setNumber(FourState.YES); // set it to YES
 						}
 						else { // otherwise
@@ -156,69 +156,6 @@ public class AbstractPlayer {
 				
 				
 			}
-
-				
-				
-					
-			//TODO deal with unindicated cards
-				// multicolors indicated separately?
-					//if so, set relevant column to no
-					//if not, set relevant column AND multicolor column to no
-		}
-	}
-	
-//	public void receiveColorInfo(ArrayList<Integer> handIndices, CardAttribute attribute, ColorVariant colorVariant) {
-//		ArrayList<AttributeTracker[][]> indicatedCards = new ArrayList<AttributeTracker[][]>();
-//		ArrayList<AttributeTracker[][]> notIndicatedCards = new ArrayList<AttributeTracker[][]>();
-//		
-//		for (Integer i = 0; i < this.cardInfoTables.size(); i++) {
-//			if (handIndices.contains(i)) {
-//				indicatedCards.add(this.cardInfoTables.get(i));
-//			}
-//			else {
-//				notIndicatedCards.add(this.cardInfoTables.get(i));
-//			}
-//		}
-//		for (AttributeTracker[][] cardTable : indicatedCards) {
-//			
-//			boolean multicolorFound = false;
-//			for (int i = 0; i < globalCardTracker.getCards().length; i++) {
-//				if (globalCardTracker.getCards()[i][5] > 0) {
-//					multicolorFound = true;
-//				}
-//			}
-//			// if there are no multicolors remaining in the game (or they were never added) OR if multicolors are being indicated separately, we don't need to worry and can simply check maybe on the indicated color
-//			if (multicolorFound || !colorVariant.equals(ColorVariant.MULTICOLOR_WILD)) { // no multicolors found or multicolors indicated separately
-//				
-//				for (int i = 0; i < cardTable.length; i++) {
-//					for (int j = 0; j < cardTable[i].length; j++) {
-//						if (j == color.getValue() - 1) {
-//							cardTable[i][j] = SuitColorTracker.COLOR_TRUE;
-//						} else {
-//							cardTable[i][j] = SuitColorTracker.COLOR_FALSE;
-//						}
-//					}
-//				}
-//			}
-//			//are we indicating multicolors separately or together with other cards?
-//			else { //indicating together
-//				//check what player knows about indicated card.
-//				//TODO if we already have a COLOR_POSSIBLE for the indicated color, and it's indicated again, it's definitely that color
-//				boolean colorPreviouslyIndicated = false;
-//				for (int i = 0; i < cardTable.length; i++) {
-//					if (cardTable[i][color.getValue() - 1].equals(SuitColorTracker.COLOR_POSSIBLE)) { // at least one value in this column is COLOR_POSSIBLE, so color has been previously indicated
-//						colorPreviouslyIndicated = true;
-//					}
-//				}
-//				
-//				
-//				//TODO if we have a maybe for a non-multicolor color and a different color is indicated, it is certainly multicolor
-//				
-//			}
-//			
-//		}
-//			
-//	}
 	
 	public void receiveSuitInfo(int[] handIndex, Number suit) {
 		
