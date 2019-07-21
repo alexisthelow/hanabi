@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import hanabi.cards.Card;
 import hanabi.cards.identifiers.AttributeTracker;
-import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.Color;
 import hanabi.cards.identifiers.Number;
 import hanabi.game.AbstractPlayer;
