@@ -26,7 +26,19 @@ public class Game {
 	//states
 	private Boolean gameOver;
 	
-	public Boolean processPlayedCard(AbstractPlayer player, Card card) throws Exception {
+	public void playCard(AbstractPlayer player, int handIndex) {
+		Card playedCard = player.getHand().remove(handIndex);
+		player.getCardInfoTables().remove(handIndex);
+		player.gainCardToHand(this.deck.getCards().pop());
+		try {
+			processPlayedCard(player, playedCard);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	public void processPlayedCard(AbstractPlayer player, Card card) throws Exception {
 		
 		ArrayList<Card> relevantColor;
 		
@@ -57,24 +69,22 @@ public class Game {
 				break;
 				
 			default:
-				throw new Exception("Game.processPlayedCard(): couldn't find correct card array for card " + card.getColor() + card.getSuit().getNumeral());
+				throw new Exception("Game.processPlayedCard(): couldn't find correct card array for card " + card.getColor() + card.getNumber().getValue());
 			
 		}
 		
-		if(card.getSuit().getNumeral()==relevantColor.size() + 1) {
+		if(card.getNumber().getValue()==relevantColor.size() + 1) {
 			relevantColor.add(card);
-			if (card.getSuit().getNumeral() == 5) {
+			if (card.getNumber().getValue() == 5) {
 				gainClock();
 			}
 			
 			
 			//TODO notify players to update GlobalCardTrackers
-			return true; // play was successful
 		}
 		else {
 			burnFuse();
 			processDiscard(card);
-			return false;
 		}
 	}
 	

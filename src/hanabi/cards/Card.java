@@ -79,12 +79,12 @@ public class Card {
 		this.color = color;
 	}
 
-	public Number getSuit() {
+	public Number getNumber() {
 		return number;
 	}
 
-	public void setSuit(Number suit) {
-		this.number = suit;
+	public void setNumber(Number number) {
+		this.number = number;
 	}
 	
 	public Boolean getOwningPlayerDeducedIdentity() {

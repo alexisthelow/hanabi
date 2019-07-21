@@ -11,13 +11,20 @@ import hanabi.cards.identifiers.Number;
 
 public class AbstractPlayer {
 	
-	private ArrayList<Card> hand = new ArrayList<Card>();
+	private ArrayList<Card> hand;
 	private ArrayList<AttributeTracker[][]> cardInfoTables = new ArrayList<AttributeTracker[][]>();
 	private GlobalCardTracker globalCardTracker;
+	private String name;
 
-
-	public AbstractPlayer(ArrayList<Card> hand, ColorVariant colorVariant) {
+	public AbstractPlayer(String name, ColorVariant colorVariant) {
 		super();
+		this.name = name;
+		this.globalCardTracker = new GlobalCardTracker(colorVariant);
+	}
+
+	public AbstractPlayer(String name, ArrayList<Card> hand, ColorVariant colorVariant) {
+		super();
+		this.name = name;
 		this.hand = hand;
 		this.globalCardTracker = new GlobalCardTracker(colorVariant);
 		
@@ -28,16 +35,16 @@ public class AbstractPlayer {
 
 	public Card playCard(int handIndex) { //return true if successful; return false if not
 		Card playedCard = this.hand.remove(handIndex);
+		this.cardInfoTables.remove(handIndex);
 		//TODO draw card
-		//TODO replace card info table
 		return playedCard;
 	}
 	
 	public void gainCardToHand(Card card) {
 		this.hand.add(card);
+		this.cardInfoTables.add(getNewCardInfoTable());
 	}
 	
-	//TODO receive and interpret info
 	public void receiveInfo(ArrayList<Integer> handIndices, CardAttribute attribute, ColorVariant colorVariant) {
 		
 		ArrayList<AttributeTracker[][]> indicatedCards = new ArrayList<AttributeTracker[][]>();
@@ -177,9 +184,6 @@ public class AbstractPlayer {
 		}
 	}
 	
-	public void receiveSuitInfo(int[] handIndex, Number suit) {
-		
-	}
 	//TODO deduce from visible cards
 	//TODO give info
 	//TODO discard
