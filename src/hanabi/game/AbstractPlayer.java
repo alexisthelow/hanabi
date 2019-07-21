@@ -151,11 +151,25 @@ public class AbstractPlayer {
 						cardTable[i][attribute.getValue() - 1].setColor(FourState.NO);
 					}
 				}
-					
-					
-				
+				//non indicated cards complete
+			} // end multicolor indicated together
+		} // end color info processing
+		
+		// now we need to check each card table to see if it's been identified; if any have been, the card in hand at the relevant index should be indicated as identified and marked on the global card tracker
+		for (int i = 0; i < this.cardInfoTables.size(); i++) { // for each cardInfoTable
+			
+			AttributeTracker[][] currentCardTable = this.cardInfoTables.get(i);
+			
+			for (int j = 0; j < currentCardTable.length; j++) { // for each of its rows
+				for (int k = 0; k < currentCardTable[j].length; k++) { // for each column in that row
+					if (currentCardTable[j][k].getColor().equals(FourState.YES) && currentCardTable[j][k].getNumber().equals(FourState.YES)) { // if both color and number are yes at that location
+						this.hand.get(i).setOwningPlayerDeducedIdentity(true);
+					}
+				}
 				
 			}
+		}
+	}
 	
 	public void receiveSuitInfo(int[] handIndex, Number suit) {
 		
