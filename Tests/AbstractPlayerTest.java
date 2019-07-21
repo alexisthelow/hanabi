@@ -40,8 +40,7 @@ class AbstractPlayerTest {
 		ArrayList<Integer> handIndices = new ArrayList<Integer>();
 		handIndices.add(0);
 		handIndices.add(2);
-		CardAttribute attribute = Number.ONE;
-		player.receiveInfo(handIndices, attribute, ColorVariant.MULTICOLOR);
+		player.receiveInfo(handIndices, Number.ONE, ColorVariant.MULTICOLOR);
 		for (AttributeTracker[][] cardTable : player.getCardInfoTables()) {
 			System.out.println(cardTable);
 			for (int i = 0; i < cardTable.length; i++) {
@@ -50,6 +49,17 @@ class AbstractPlayerTest {
 				}
 			}
 		}
+		handIndices.remove(1);
+		handIndices.remove(0);
+		handIndices.add(2);
+		player.receiveInfo(handIndices, Color.RED, ColorVariant.MULTICOLOR);
+		System.out.println(player.getGlobalCardTracker().toString());
+		handIndices.remove(0);
+		handIndices.add(0);
+		handIndices.add(1);
+		player.receiveInfo(handIndices, Color.MULTICOLOR, ColorVariant.MULTICOLOR);
+		System.out.println(player.getGlobalCardTracker().toString());
+		
 	}
 
 }

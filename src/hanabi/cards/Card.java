@@ -41,6 +41,7 @@ public class Card {
 			break;
 
 		}
+		
 		switch (colorValue) {
 		
 		case 0:
@@ -66,10 +67,8 @@ public class Card {
 		case 5:
 			this.color = Color.MULTICOLOR;
 			break;
-			
- 		default:
-			break;
 		}
+		this.ownerIdentified = false;
 	}
 
 	public Color getColor() {

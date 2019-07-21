@@ -160,10 +160,16 @@ public class AbstractPlayer {
 			
 			AttributeTracker[][] currentCardTable = this.cardInfoTables.get(i);
 			
-			for (int j = 0; j < currentCardTable.length; j++) { // for each of its rows
-				for (int k = 0; k < currentCardTable[j].length; k++) { // for each column in that row
-					if (currentCardTable[j][k].getColor().equals(FourState.YES) && currentCardTable[j][k].getNumber().equals(FourState.YES)) { // if both color and number are yes at that location
+			for (Integer j = 0; j < currentCardTable.length; j++) { // for each of its rows
+				for (Integer k = 0; k < currentCardTable[j].length; k++) { // for each column in that row
+					if (currentCardTable[j][k].getColor().equals(FourState.YES) && currentCardTable[j][k].getNumber().equals(FourState.YES) && !this.hand.get(i).getOwningPlayerDeducedIdentity()) { // if both color and number are yes at that location
 						this.hand.get(i).setOwningPlayerDeducedIdentity(true);
+						try {
+							this.globalCardTracker.cardSeen(new Card(j, k));
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							e.printStackTrace();
+						}
 					}
 				}
 				
