@@ -23,9 +23,6 @@ public class Game {
 	private int clocks;
 	private int fuses;
 	
-	//states
-	private Boolean gameOver;
-	
 	public void playCard(AbstractPlayer player, int handIndex) {
 		Card playedCard = player.getHand().remove(handIndex);
 		player.getCardInfoTables().remove(handIndex);

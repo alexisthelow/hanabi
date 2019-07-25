@@ -6,6 +6,9 @@ public class Engine {
 
 	private Game game;
 	
+	//states
+	private Boolean gameOver;
+	
 	public static void main(String[] args) {
 		//create new game
 		//select variants
