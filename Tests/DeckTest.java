@@ -102,8 +102,10 @@ public class DeckTest {
 	}
 	
 	@Test
-	public void does_the_deck_look_shuffled_lets_find_out() {
-		
+	public void do_the_decks_look_shuffled_lets_find_out() {
+		System.out.println(standardDeck.toString());
+		System.out.println(singleMulticolorDeck.toString());
+		System.out.println(multicolorDeck.toString());
 	}
 
 }

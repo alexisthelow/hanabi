@@ -61,5 +61,15 @@ public class Deck {
 	public void shuffleDeck() {
 		Collections.shuffle(this.cards);
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		int deckIndex = 0;
+		for (Card c : this.cards) {
+			sb.append(deckIndex).append(")").append(c.getNumber().getName()).append(" ").append(c.getColor().getName()).append("\n");
+			deckIndex++;
+		}
+		return sb.toString();
+	}
 
 }
