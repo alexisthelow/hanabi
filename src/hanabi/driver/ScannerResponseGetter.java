@@ -11,7 +11,12 @@ public class ScannerResponseGetter {
 		
 		while (true) {
 			System.out.print(prompt);
-			System.out.print("between " + lowestVal + " and " + highestVal + ": ");
+			if (displayRange) {
+				System.out.print("between " + lowestVal + " and " + highestVal + ": ");
+			}
+			else {
+				System.out.println(": ");
+			}
 			try {
 				response = Integer.parseInt(kb.nextLine());
 				if (response >= lowestVal && response <= highestVal) {
@@ -31,7 +36,12 @@ public class ScannerResponseGetter {
 		
 		while (true) {
 			System.out.print(prompt);
-			System.out.print(" between " + lowestVal + " and " + highestVal + ": ");
+			if (displayRange) {
+				System.out.print("between " + lowestVal + " and " + highestVal + ": ");
+			}
+			else {
+				System.out.println(": ");
+			}
 			
 			try {
 				response = Double.parseDouble(kb.nextLine());
