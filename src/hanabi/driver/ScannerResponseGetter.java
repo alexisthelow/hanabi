@@ -6,7 +6,7 @@ public class ScannerResponseGetter {
 	
 	Scanner kb = new Scanner(System.in);
 
-	public int intRequest(String prompt, int lowestVal, int highestVal) {
+	public int intRequest(String prompt, int lowestVal, int highestVal, boolean displayRange) {
 		int response;
 		
 		while (true) {
@@ -25,7 +25,7 @@ public class ScannerResponseGetter {
 		return response;
 	}
 	
-	public double doubleRequest(String prompt, double lowestVal, double highestVal) {
+	public double doubleRequest(String prompt, double lowestVal, double highestVal, boolean displayRange) {
 		
 		double response;
 		
