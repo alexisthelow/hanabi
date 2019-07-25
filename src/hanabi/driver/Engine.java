@@ -1,9 +1,14 @@
 package hanabi.driver;
 
+import java.util.Scanner;
+
 import hanabi.game.Game;
 
 public class Engine {
 
+	//objects
+	Scanner kb = new Scanner(System.in);
+	
 	private Game game;
 	
 	//states
@@ -22,4 +27,10 @@ public class Engine {
 		//if new game is desired, loop to beginning
 		
 	}
+	
+	//select variants
+	public void selectVariant(Scanner kb) {
+		
+	}
+	
 }

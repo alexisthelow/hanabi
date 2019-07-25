@@ -23,6 +23,8 @@ public class Game {
 	private int clocks;
 	private int fuses;
 	
+	
+	
 	public void playCard(AbstractPlayer player, int handIndex) {
 		Card playedCard = player.getHand().remove(handIndex);
 		player.getCardInfoTables().remove(handIndex);
