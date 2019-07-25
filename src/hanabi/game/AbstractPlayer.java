@@ -65,7 +65,7 @@ public class AbstractPlayer {
 			for (AttributeTracker[][] cardTable : indicatedCards) { // for each indicated card
 				for (int i = 0; i < cardTable.length; i++) { // for each row
 					for (int j = 0; j < cardTable[i].length; j++) { // for each cell
-						if (i == attribute.getValue() - 1) { // if it's the right row
+						if (i == attribute.getValue()) { // if it's the right row
 							cardTable[i][j].setNumber(FourState.YES); // set it to YES
 						}
 						else { // otherwise
@@ -75,8 +75,8 @@ public class AbstractPlayer {
 				}
 			}
 			for (AttributeTracker[][] cardTable : notIndicatedCards) { // for each non indicated card
-				for (int i = 0; i < cardTable[attribute.getValue() - 1].length; i++) {
-					cardTable[attribute.getValue() - 1][i].setNumber(FourState.NO); // set the relevant row to NO
+				for (int i = 0; i < cardTable[attribute.getValue()].length; i++) {
+					cardTable[attribute.getValue()][i].setNumber(FourState.NO); // set the relevant row to NO
 				}
 			}
 		}
@@ -88,7 +88,7 @@ public class AbstractPlayer {
 				for (AttributeTracker[][] cardTable : indicatedCards) {
 					for (int i = 0; i < cardTable.length; i++) {
 						for (int j = 0; j < cardTable[i].length; j++) {
-							if (j == attribute.getValue() - 1) { // set the relevant column to yes
+							if (j == attribute.getValue()) { // set the relevant column to yes
 								cardTable[i][j].setColor(FourState.YES);
 							}
 							else { // and the others to no
@@ -108,7 +108,7 @@ public class AbstractPlayer {
 					for (int i = 0; i < cardTable.length; i++) { // has a color already been indicated on this card? 
 						for (int j = 0; j < cardTable[i].length; j++) {
 							if (cardTable[i][j].getColor().equals(FourState.MAYBE)) { // it has. does the newly indicated color match the old indicated color?
-								if (j == attribute.getValue() - 1) { // it does
+								if (j == attribute.getValue()) { // it does
 									maybeFoundMatchesOld = true;
 								}
 							}
@@ -117,7 +117,7 @@ public class AbstractPlayer {
 					if (maybeFoundMatchesOld) { // maybe was found in the same color column as the indicated color
 						for (int i = 0; i < cardTable.length; i++) {
 							for (int j = 0; j < cardTable[i].length; j++) { // set relevant column to yes and multicolor column to no
-								if (j == attribute.getValue() - 1) { 
+								if (j == attribute.getValue()) { 
 									cardTable[i][j].setColor(FourState.YES);
 								}
 								else {
@@ -142,7 +142,7 @@ public class AbstractPlayer {
 					else { // no maybe found, so set that column and multicolor column to maybe 
 						for (int i = 0; i < cardTable.length; i++) {
 							for (int j = 0; j < cardTable[i].length; j++) {
-								if (j == attribute.getValue() - 1 || j == 5) {
+								if (j == attribute.getValue() || j == 5) {
 									cardTable[i][j].setColor(FourState.MAYBE);
 								}
 								else {
@@ -155,7 +155,7 @@ public class AbstractPlayer {
 				}
 				for (AttributeTracker[][] cardTable : notIndicatedCards) {
 					for (int i = 0; i < cardTable.length; i++) {
-						cardTable[i][attribute.getValue() - 1].setColor(FourState.NO);
+						cardTable[i][attribute.getValue()].setColor(FourState.NO);
 					}
 				}
 				//non indicated cards complete

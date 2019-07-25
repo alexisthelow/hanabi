@@ -73,9 +73,9 @@ public class Game {
 			
 		}
 		
-		if(card.getNumber().getValue()==relevantColor.size() + 1) {
+		if(card.getNumber().getAdjustedValue()==relevantColor.size() + 1) {
 			relevantColor.add(card);
-			if (card.getNumber().getValue() == 5) {
+			if (card.getNumber().getAdjustedValue() == 5) {
 				gainClock();
 			}
 			
