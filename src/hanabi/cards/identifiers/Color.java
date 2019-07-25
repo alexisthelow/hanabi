@@ -2,7 +2,7 @@ package hanabi.cards.identifiers;
 
 public enum Color implements CardAttribute {
 	
-	RED("Red", 3), GREEN("Green", 2), YELLOW("Yellow", 4), BLUE("Blue", 1), WHITE("White", 5), MULTICOLOR("Multicolor", 6);
+	BLUE("Blue", 0), GREEN("Green", 1), RED("Red", 2), YELLOW("Yellow", 3),  WHITE("White", 4), MULTICOLOR("Multicolor", 5);
 	
 	private String name;
 	private int value;

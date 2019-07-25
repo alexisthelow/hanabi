@@ -2,7 +2,7 @@ package hanabi.cards.identifiers;
 
 public enum Number implements CardAttribute {
 	
-	ONE("One", 1), TWO("Two", 2), THREE("Three", 3), FOUR("Four", 4), FIVE("Five", 5);
+	ONE("One", 0), TWO("Two", 1), THREE("Three", 2), FOUR("Four", 3), FIVE("Five", 4);
 	
 	private String name;
 	private int value;
