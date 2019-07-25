@@ -1,3 +1,4 @@
+package hanabi.game;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;

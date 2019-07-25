@@ -1,3 +1,4 @@
+package hanabi.game;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
