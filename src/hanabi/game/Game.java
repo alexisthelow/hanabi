@@ -23,8 +23,10 @@ public class Game {
 	private int clocks;
 	private int fuses;
 	
-	
-	
+	public Game() {
+		
+	}
+
 	public void playCard(AbstractPlayer player, int handIndex) {
 		Card playedCard = player.getHand().remove(handIndex);
 		player.getCardInfoTables().remove(handIndex);
@@ -177,6 +179,70 @@ public class Game {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+
+	public Boolean getVariantGrandFinale() {
+		return variantGrandFinale;
+	}
+
+	public void setVariantGrandFinale(Boolean variantGrandFinale) {
+		this.variantGrandFinale = variantGrandFinale;
+	}
+
+	public ColorVariant getColorVariant() {
+		return colorVariant;
+	}
+
+	public void setColorVariant(ColorVariant colorVariant) {
+		this.colorVariant = colorVariant;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+
+	public PlayedSet getPlayedSet() {
+		return playedSet;
+	}
+
+	public void setPlayedSet(PlayedSet playedSet) {
+		this.playedSet = playedSet;
+	}
+
+	public DiscardPile getDiscardPile() {
+		return discardPile;
+	}
+
+	public void setDiscardPile(DiscardPile discardPile) {
+		this.discardPile = discardPile;
+	}
+
+	public ArrayList<AbstractPlayer> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<AbstractPlayer> players) {
+		this.players = players;
+	}
+
+	public int getClocks() {
+		return clocks;
+	}
+
+	public void setClocks(int clocks) {
+		this.clocks = clocks;
+	}
+
+	public int getFuses() {
+		return fuses;
+	}
+
+	public void setFuses(int fuses) {
+		this.fuses = fuses;
 	}
 	
 }
