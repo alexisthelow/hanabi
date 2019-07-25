@@ -1,5 +1,6 @@
 package hanabi.cards;
 
+import java.util.Collections;
 import java.util.Stack;
 
 import hanabi.game.ColorVariant;
@@ -49,13 +50,16 @@ public class Deck {
 			}
 		}
 		
+		shuffleDeck();
+		
 	}
 
 	public Stack<Card> getCards() {
 		return cards;
 	}
-
-	//TODO add shuffle
-	//TODO create Deck
 	
+	public void shuffleDeck() {
+		Collections.shuffle(this.cards);
+	}
+
 }
