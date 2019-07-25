@@ -24,7 +24,8 @@ public class Game {
 	private int fuses;
 	
 	public Game() {
-		
+		this.clocks = 8;
+		this.fuses = 3;
 	}
 
 	public void playCard(AbstractPlayer player, int handIndex) {
