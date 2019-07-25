@@ -19,6 +19,10 @@ public enum Color implements CardAttribute {
 	public int getValue() {
 		return value;
 	}
+	
+	public int getAdjustedValue() {
+		return value + 1;
+	}
 
 	@Override
 	public String getAttributeType() {

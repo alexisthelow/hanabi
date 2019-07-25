@@ -20,6 +20,10 @@ public enum Number implements CardAttribute {
 		return value;
 	}
 
+	public int getAdjustedValue() {
+		return value + 1;
+	}
+
 	@Override
 	public String getAttributeType() {
 		return "number";
