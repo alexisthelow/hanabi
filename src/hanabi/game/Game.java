@@ -23,6 +23,9 @@ public class Game {
 	private int clocks;
 	private int fuses;
 	
+	//states
+	private static boolean gameOver;
+	
 	public Game() {
 		this.clocks = 8;
 		this.fuses = 3;
