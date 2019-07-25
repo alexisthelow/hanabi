@@ -7,7 +7,8 @@ public class Engine {
 	private Game game;
 	
 	//states
-	private Boolean gameOver;
+	private boolean gameOver;
+	private boolean quitGame;
 	
 	public static void main(String[] args) {
 		//create new game
