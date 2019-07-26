@@ -1,6 +1,7 @@
 package hanabi.driver;
 
 import hanabi.game.ColorVariant;
+import hanabi.game.ComputerPlayer;
 import hanabi.game.Game;
 
 public class Engine {

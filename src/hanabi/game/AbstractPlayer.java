@@ -7,7 +7,6 @@ import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.FourState;
-import hanabi.cards.identifiers.Number;
 
 public class AbstractPlayer {
 	
