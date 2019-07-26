@@ -200,27 +200,52 @@ public class Engine {
 	//remove player menu
 	public static void removePlayerMenu() {
 		boolean exitRemovePlayerMenu = false;
-		do {
-			System.out.println("Remove Player");
-			System.out.println("--------");
-			for (AbstractPlayer player : game.getPlayers()) {
-				int counter = 0;
-				System.out.println(++counter + ") " + player.getName());
-			}
-			System.out.println(game.getPlayers().size() + 1 + ") Go back");
-			int response = srg.intRequest("Make a selection", 1, game.getPlayers().size() + 1, false);
-			if (response == game.getPlayers().size() + 1) {
-				exitRemovePlayerMenu = true;
-			}
-			else {
-				game.getPlayers().remove(response);
-			}
-		} while (!exitRemovePlayerMenu);
+		if (game.getPlayers().size() > 0) {
+			do {
+				System.out.println("Remove Player");
+				System.out.println("--------");
+				for (AbstractPlayer player : game.getPlayers()) {
+					int counter = 0;
+					System.out.println(++counter + ") " + player.getName());
+				}
+				System.out.println(game.getPlayers().size() + 1 + ") Go back");
+				int response = srg.intRequest("Make a selection", 1, game.getPlayers().size() + 1, false);
+				if (response == game.getPlayers().size() + 1) {
+					exitRemovePlayerMenu = true;
+				} else {
+					game.getPlayers().remove(response);
+				}
+			} while (!exitRemovePlayerMenu);
+		}
+		else {
+			System.out.println("No players to remove!");
+		}
 	}
 	
 	//change first player menu
 	public static void changeFirstPlayerMenu() {
-		
+		boolean exitMenu = false;
+		if (game.getPlayers().size() > 1) {
+			do {
+				System.out.println("Change First Player");
+				System.out.println("--------");
+				System.out.println(game.getPlayers().get(0).getName() + " is currently the first player.");
+				for (int i = 1; i < game.getPlayers().size(); i++) {
+					System.out.println(i + ") " + game.getPlayers().get(i).getName());
+				}
+				System.out.println(game.getPlayers().size() + 1 + ") Go back");
+				int response = srg.intRequest("Select a new first player", 1, game.getPlayers().size(), false);
+				if (response == game.getPlayers().size() + 1) {
+					exitMenu = true;
+				}
+				else {
+					game.getPlayers().add(0, game.getPlayers().remove(response));
+				}
+			} while (!exitMenu);
+		}
+		else {
+			System.out.println("There is only one player!");
+		}
 	}
 	
 	
