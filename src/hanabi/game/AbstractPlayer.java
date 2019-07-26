@@ -15,9 +15,15 @@ public class AbstractPlayer {
 	private ArrayList<AttributeTracker[][]> cardInfoTables = new ArrayList<AttributeTracker[][]>();
 	private GlobalCardTracker globalCardTracker;
 	private String name;
+	
+	public AbstractPlayer() {
+		this.name = "unknown";
+		this.hand = new ArrayList<Card>();
+		this.globalCardTracker = new GlobalCardTracker(ColorVariant.NONE);
+
+	}
 
 	public AbstractPlayer(String name, ColorVariant colorVariant) {
-		super();
 		this.name = name;
 		this.globalCardTracker = new GlobalCardTracker(colorVariant);
 	}
