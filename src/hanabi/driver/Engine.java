@@ -56,15 +56,34 @@ public class Engine {
 	}
 	
 	//start new game menu
-	public static int newGameMenu() {
-		System.out.println("New Game");
-		System.out.println("--------");
-		System.out.println("1) Add player");
-		System.out.println("2) Select variants");
-		System.out.println("3) Start game");
-		System.out.println("4) Back to main menu");
+	public static void newGameMenu() {
+		boolean exitMenu = false;
+		do {
+			System.out.println("New Game");
+			System.out.println("--------");
+			System.out.println("1) Add / Remove / Change Players");
+			System.out.println("2) Select variants");
+			System.out.println("3) Start game");
+			System.out.println("4) Back to main menu");
+			switch (srg.intRequest("Make a selection", 1, 4, false)) {
+				case 1:
+					alterPlayersMenu();
+					break;
+				case 2:
+					selectVariantMenu();
+					break;
+				case 3:
+					startGame = true;
+					break;
+				case 4:
+					exitMenu = true;
+					break;
+	
+				default:
+					break;
+			}
+		} while (!exitMenu);
 		
-		return srg.intRequest("Make a selection", 1, 4, false);
 		
 	}
 	
