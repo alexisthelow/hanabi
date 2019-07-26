@@ -229,5 +229,13 @@ public class AbstractPlayer {
 	public void setGlobalCardTracker(GlobalCardTracker globalCardTracker) {
 		this.globalCardTracker = globalCardTracker;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 }
