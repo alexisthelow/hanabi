@@ -199,7 +199,23 @@ public class Engine {
 	
 	//remove player menu
 	public static void removePlayerMenu() {
-		
+		boolean exitRemovePlayerMenu = false;
+		do {
+			System.out.println("Remove Player");
+			System.out.println("--------");
+			for (AbstractPlayer player : game.getPlayers()) {
+				int counter = 0;
+				System.out.println(++counter + ") " + player.getName());
+			}
+			System.out.println(game.getPlayers().size() + 1 + ") Go back");
+			int response = srg.intRequest("Make a selection", 1, game.getPlayers().size() + 1, false);
+			if (response == game.getPlayers().size() + 1) {
+				exitRemovePlayerMenu = true;
+			}
+			else {
+				game.getPlayers().remove(response);
+			}
+		} while (!exitRemovePlayerMenu);
 	}
 	
 	//change first player menu
