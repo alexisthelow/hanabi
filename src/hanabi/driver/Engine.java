@@ -2,7 +2,9 @@ package hanabi.driver;
 
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
+import hanabi.game.ComputerPlayer;
 import hanabi.game.Game;
+import hanabi.game.HumanPlayer;
 
 public class Engine {
 
@@ -172,21 +174,25 @@ public class Engine {
 			System.out.println("2) Add computer player");
 			System.out.println("3) Go back");
 			
-			switch (srg.intRequest("Make a selection", 1, 3, false)) {
+			switch (srg.intRequest("Make a selection", 1, 3, false)) { // is it a human or a computer?
 				
 				case 1: // adding a human player
+					newPlayer = new HumanPlayer();
+					newPlayer.setName(srg.stringRequest("Enter the player's name"));
+					game.getPlayers().add(newPlayer);
 					
 					break;
 				case 2: // adding computer player
-					
+					newPlayer = new ComputerPlayer();
+					newPlayer.setName(srg.stringRequest("Enter the player's name"));
+					game.getPlayers().add(newPlayer);
 					break;
 				case 3: // exit
 					exitAddPlayerMenu = true;
 					break;
 					
 			}
-			//is it a human or a computer?
-			//if human, what is the player's name?
+			
 		} while (!exitAddPlayerMenu);
 		
 	}
