@@ -26,7 +26,7 @@ class AbstractPlayerTest {
 		hand.add(new Card(Color.RED, Number.ONE));
 		hand.add(new Card(Color.BLUE, Number.FIVE));
 		hand.add(new Card(Color.WHITE, Number.TWO));
-		player = new AbstractPlayer(hand, ColorVariant.MULTICOLOR);
+		player = new AbstractPlayer("testplayer", hand, ColorVariant.MULTICOLOR);
 	}
 
 	@AfterEach
