@@ -23,7 +23,7 @@ public class Engine {
 			//create new game
 			game = new Game();
 			do {
-				
+				mainMenu();
 			} while (!startGame);
 			//select variants
 			//add players
