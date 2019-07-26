@@ -29,6 +29,7 @@ public class Game {
 	public Game() {
 		this.clocks = 8;
 		this.fuses = 3;
+		this.colorVariant = ColorVariant.NONE;
 	}
 
 	public void playCard(AbstractPlayer player, int handIndex) {

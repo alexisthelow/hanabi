@@ -229,16 +229,16 @@ public class Engine {
 			do {
 				System.out.println("Remove Player");
 				System.out.println("--------");
+				int counter = 1;
 				for (AbstractPlayer player : game.getPlayers()) {
-					int counter = 0;
-					System.out.println(++counter + ") " + player.getName());
+					System.out.println(counter++ + ") " + player.getName());
 				}
 				System.out.println(game.getPlayers().size() + 1 + ") Go back");
 				int response = srg.intRequest("Make a selection", 1, game.getPlayers().size() + 1, false);
 				if (response == game.getPlayers().size() + 1) {
 					exitRemovePlayerMenu = true;
 				} else {
-					game.getPlayers().remove(response);
+					game.getPlayers().remove(response - 1);
 				}
 			} while (!exitRemovePlayerMenu);
 		}
@@ -258,9 +258,9 @@ public class Engine {
 				for (int i = 1; i < game.getPlayers().size(); i++) {
 					System.out.println(i + ") " + game.getPlayers().get(i).getName());
 				}
-				System.out.println(game.getPlayers().size() + 1 + ") Go back");
+				System.out.println(game.getPlayers().size() + ") Go back");
 				int response = srg.intRequest("Select a new first player", 1, game.getPlayers().size(), false);
-				if (response == game.getPlayers().size() + 1) {
+				if (response == game.getPlayers().size()) {
 					exitMenu = true;
 				}
 				else {
