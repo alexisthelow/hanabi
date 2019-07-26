@@ -24,7 +24,7 @@ public class Engine {
 			game = new Game();
 			do {
 				mainMenu();
-			} while (!startGame);
+			} while (!startGame || !quitGame);
 			//select variants
 			//add players
 			//proceed with play
@@ -39,14 +39,20 @@ public class Engine {
 	}
 	
 	//main menu
-	public static int mainMenu() {
+	public static void mainMenu() {
 		System.out.println("~Hanabi~");
 		System.out.println("--------");
 		System.out.println("1) Start new game");
 		System.out.println("2) Exit");
 		
-		return srg.intRequest("Make a selection", 1, 2, false);
-		
+		switch (srg.intRequest("Make a selection", 1, 2, false)) {
+			case 1:
+				newGameMenu();
+				break;
+			case 2:
+				quitGame = true;
+				break;
+		}
 	}
 	
 	//start new game menu
