@@ -132,4 +132,48 @@ public class Engine {
 		
 	}
 	
+	//alter players menu
+	public void alterPlayersMenu() {
+		boolean exitAlterPlayersMenu = false;
+		do {
+			System.out.println("Add / Remove players");
+			System.out.println("--------");
+			System.out.println("1) Add player");
+			System.out.println("2) Remove player");
+			System.out.println("3) Change first player");
+			System.out.println("4) Go back");
+			switch (srg.intRequest("Make a selection", 1, 4, false)) {
+				case 1:
+					addPlayerMenu();
+					break;
+				case 2:
+					removePlayerMenu();
+					break;
+				case 3:
+					changeFirstPlayerMenu();
+					break;
+				case 4:
+					exitAlterPlayersMenu = true;
+					break;
+			}
+		} while (!exitAlterPlayersMenu);
+	}
+	
+	//add player menu
+	public void addPlayerMenu() {
+		
+	}
+	
+	//remove player menu
+	public void removePlayerMenu() {
+		
+	}
+	
+	//change first player menu
+	public void changeFirstPlayerMenu() {
+		
+	}
+	
+	
+	
 }
