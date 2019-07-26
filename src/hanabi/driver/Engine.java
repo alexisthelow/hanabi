@@ -1,7 +1,7 @@
 package hanabi.driver;
 
+import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
-import hanabi.game.ComputerPlayer;
 import hanabi.game.Game;
 
 public class Engine {
@@ -37,7 +37,7 @@ public class Engine {
 	}
 	
 	//main menu
-	public int mainMenu() {
+	public static int mainMenu() {
 		System.out.println("~Hanabi~");
 		System.out.println("--------");
 		System.out.println("1) Start new game");
@@ -48,7 +48,7 @@ public class Engine {
 	}
 	
 	//start new game menu
-	public int newGameMenu() {
+	public static int newGameMenu() {
 		System.out.println("New Game");
 		System.out.println("--------");
 		System.out.println("1) Add player");
@@ -61,7 +61,7 @@ public class Engine {
 	}
 	
 	//select variant menu
-	public void selectVariantMenu() {
+	public static void selectVariantMenu() {
 		boolean exitVariantMenu = false;
 		do {
 			//display grand finale
@@ -134,7 +134,7 @@ public class Engine {
 	}
 	
 	//alter players menu
-	public void alterPlayersMenu() {
+	public static void alterPlayersMenu() {
 		boolean exitAlterPlayersMenu = false;
 		do {
 			System.out.println("Add / Remove players");
@@ -161,17 +161,43 @@ public class Engine {
 	}
 	
 	//add player menu
-	public void addPlayerMenu() {
+	public static void addPlayerMenu() {
+		boolean exitAddPlayerMenu = false;
+		AbstractPlayer newPlayer;
+		
+		do {
+			System.out.println("Add Player");
+			System.out.println("--------");
+			System.out.println("1) Add human player");
+			System.out.println("2) Add computer player");
+			System.out.println("3) Go back");
+			
+			switch (srg.intRequest("Make a selection", 1, 3, false)) {
+				
+				case 1: // adding a human player
+					
+					break;
+				case 2: // adding computer player
+					
+					break;
+				case 3: // exit
+					exitAddPlayerMenu = true;
+					break;
+					
+			}
+			//is it a human or a computer?
+			//if human, what is the player's name?
+		} while (!exitAddPlayerMenu);
 		
 	}
 	
 	//remove player menu
-	public void removePlayerMenu() {
+	public static void removePlayerMenu() {
 		
 	}
 	
 	//change first player menu
-	public void changeFirstPlayerMenu() {
+	public static void changeFirstPlayerMenu() {
 		
 	}
 	
