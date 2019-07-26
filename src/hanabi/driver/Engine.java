@@ -12,12 +12,16 @@ public class Engine {
 	
 	//states
 	
+	private static boolean startGame;
 	private static boolean quitGame;
 	
 	public static void main(String[] args) {
 		do {
-			
 			//create new game
+			game = new Game();
+			do {
+				
+			} while (!startGame);
 			//select variants
 			//add players
 			//proceed with play
