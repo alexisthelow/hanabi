@@ -73,7 +73,7 @@ public class Engine {
 					selectVariantMenu();
 					break;
 				case 3:
-					startGame = true;
+					startGame = true; 
 					break;
 				case 4:
 					exitMenu = true;
