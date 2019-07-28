@@ -1,9 +1,9 @@
 package hanabi.game;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 import hanabi.cards.Card;
+import hanabi.cards.Deck;
 import hanabi.cards.GlobalCardTracker;
 import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
@@ -46,9 +46,12 @@ public class AbstractPlayer {
 		return playedCard;
 	}
 	
-	public void gainCardToHand(Stack<Card> deck) {
-		this.hand.add(deck.pop());
+	//gains card to hand, returns card gained so other players can be updated
+	public Card gainCardToHand(Deck deck) {
+		Card c = deck.getCards().pop();
+		this.hand.add(c);
 		this.cardInfoTables.add(getNewCardInfoTable());
+		return c;
 	}
 	
 	public void receiveInfo(ArrayList<Integer> handIndices, CardAttribute attribute, ColorVariant colorVariant) {

@@ -1,5 +1,6 @@
 package hanabi.driver;
 
+import hanabi.cards.Card;
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
 import hanabi.game.ComputerPlayer;
@@ -22,7 +23,17 @@ public class Engine {
 		while (!quitGame) {
 			mainMenu();
 			
-			System.out.println(game.getColorVariant().toString() + " " + game.getPlayers().size());
+			if (startGame) {
+				dealOpeningHand(); //deal cards
+				
+				//at beginning of turn, 
+				
+				//at end of turn, check for game end :
+					//necessary card lost OR deck empty and last turn complete?
+					//all stacks complete?
+				
+			}
+			
 		}
 		
 	}
@@ -36,6 +47,7 @@ public class Engine {
 		switch (srg.intRequest("Make a selection", 1, 2, false)) {
 			case 1:
 				game = new Game();
+				startGame = true;
 				alterPlayersMenu();
 				break;
 			case 2:
@@ -238,5 +250,24 @@ public class Engine {
 			} while (!exitVariantMenu);
 			
 		}
+	
+	public static void dealOpeningHand() {
+		int cardsPerHand = game.getPlayers().size() > 3 ? 4 : 5;
+		for (int i = 0; i < cardsPerHand; i++) {
+			for (AbstractPlayer gainingPlayer : game.getPlayers()) {
+				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck());
+				for (AbstractPlayer nonGainingPlayer : game.getPlayers()) {
+					if (!nonGainingPlayer.equals(gainingPlayer)) {
+						try {
+							nonGainingPlayer.getGlobalCardTracker().cardSeen(gainedCard);
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		} 
+	}
 	
 }
