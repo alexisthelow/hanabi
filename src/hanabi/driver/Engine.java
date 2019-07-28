@@ -1,6 +1,5 @@
 package hanabi.driver;
 
-import hanabi.cards.Deck;
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
 import hanabi.game.ComputerPlayer;
@@ -16,44 +15,53 @@ public class Engine {
 	
 	//states
 	
-	private static boolean startGame;
-	private static boolean quitGame;
+	private static boolean startGame = false;
+	private static boolean quitGame = false;
 	
 	public static void main(String[] args) {
-		do {
-			//create new game
-			game = new Game();
-			do {
-				mainMenu();
-			} while (!startGame && !quitGame);
+		game = new Game();
+		while (!quitGame) {
+			newGameMenu();
 			
-			if (!quitGame) {
-				//create a deck
-				game.setDeck(new Deck(game.getColorVariant()));
-				//deal hands to each player
-				if (game.getPlayers().size() > 3) {
-					for (int i = 0; i < 4; i++) {
-						for (AbstractPlayer player : game.getPlayers()) {
-							player.gainCardToHand(game.getDeck().getCards());
-						}
-					}
-				} else {
-					for (int i = 0; i < 5; i++) {
-						for (AbstractPlayer player : game.getPlayers()) {
-							player.gainCardToHand(game.getDeck().getCards());
-						}
-					}
-				}
-				//proceed with play
-				//player cannot discard if clocks == 8; player cannot provide info if clocks == 0
-				//stop one round after cards are gone OR if all fuses are burned OR if grandFinale == true, stop on losing necessary card OR stop when all colors are built to maximum
-				//display score
+			if (startGame) {
+				alterPlayersMenu();
 			}
-			
-		} while (!quitGame); //if new game is desired, loop to beginning
+		}
 		
-		
-		
+//		do {
+//			//create new game
+//			game = new Game();
+//			do {
+//				mainMenu();
+//			} while (!startGame && !quitGame);
+//			
+//			if (!quitGame) {
+//				//create a deck
+//				game.setDeck(new Deck(game.getColorVariant()));
+//				//deal hands to each player
+//				if (game.getPlayers().size() > 3) {
+//					for (int i = 0; i < 4; i++) {
+//						for (AbstractPlayer player : game.getPlayers()) {
+//							player.gainCardToHand(game.getDeck().getCards());
+//						}
+//					}
+//				} else {
+//					for (int i = 0; i < 5; i++) {
+//						for (AbstractPlayer player : game.getPlayers()) {
+//							player.gainCardToHand(game.getDeck().getCards());
+//						}
+//					}
+//				}
+//				//proceed with play
+//				//player cannot discard if clocks == 8; player cannot provide info if clocks == 0
+//				//stop one round after cards are gone OR if all fuses are burned OR if grandFinale == true, stop on losing necessary card OR stop when all colors are built to maximum
+//				//display score
+//			}
+//			
+//		} while (!quitGame); //if new game is desired, loop to beginning
+//		
+//		
+//		
 	}
 	
 	//main menu
@@ -65,7 +73,7 @@ public class Engine {
 		
 		switch (srg.intRequest("Make a selection", 1, 2, false)) {
 			case 1:
-				newGameMenu();
+				startGame = true;
 				break;
 			case 2:
 				quitGame = true;
@@ -77,27 +85,19 @@ public class Engine {
 	public static void newGameMenu() {
 		boolean exitMenu = false;
 		do {
-			System.out.println("New Game");
+			System.out.println("Hanabi");
 			System.out.println("--------");
-			System.out.println("1) Add / Remove / Change Players");
-			System.out.println("2) Select variants");
-			System.out.println("3) Start game");
-			System.out.println("4) Back to main menu");
-			switch (srg.intRequest("Make a selection", 1, 4, false)) {
+			System.out.println("1) Start game");
+			System.out.println("2) Quit game");
+			switch (srg.intRequest("Make a selection", 1, 2, false)) {
 				case 1:
-					alterPlayersMenu();
-					break;
-				case 2:
-					selectVariantMenu();
-					break;
-				case 3:
 					startGame = true; 
 					break;
-				case 4:
-					exitMenu = true;
+				case 2:
+					quitGame = true;
 					break;
 			}
-		} while (!exitMenu && !startGame);
+		} while (!quitGame || !startGame);
 		
 		
 	}
@@ -177,14 +177,14 @@ public class Engine {
 	
 	//alter players menu
 	public static void alterPlayersMenu() {
-		boolean exitAlterPlayersMenu = false;
+		boolean exitMenu = false;
 		do {
 			System.out.println("Add / Remove players");
 			System.out.println("--------");
 			System.out.println("1) Add player");
 			System.out.println("2) Remove player");
 			System.out.println("3) Change first player");
-			System.out.println("4) Go back");
+			System.out.println("4) Continue");
 			switch (srg.intRequest("Make a selection", 1, 4, false)) {
 				case 1:
 					addPlayerMenu();
@@ -196,10 +196,18 @@ public class Engine {
 					changeFirstPlayerMenu();
 					break;
 				case 4:
-					exitAlterPlayersMenu = true;
+					if (game.getPlayers().size() < 2) { // can't leave menu with fewer than two players
+						System.out.println("Too few players! Please add " + (2 - game.getPlayers().size()) + " more players.");
+					}
+					else if (game.getPlayers().size() > 5) { // can't leave menu with more than five players
+						System.out.println("Too many players! Please remove " + (game.getPlayers().size() - 5) + " players.");
+					}
+					else { // must be all good
+						exitMenu = true;
+					}
 					break;
 			}
-		} while (!exitAlterPlayersMenu);
+		} while (!exitMenu);
 	}
 	
 	//add player menu

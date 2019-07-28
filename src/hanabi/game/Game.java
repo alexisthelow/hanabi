@@ -35,7 +35,7 @@ public class Game {
 	public void playCard(AbstractPlayer player, int handIndex) {
 		Card playedCard = player.getHand().remove(handIndex);
 		player.getCardInfoTables().remove(handIndex);
-		player.gainCardToHand(this.deck.getCards().pop());
+		player.gainCardToHand(this.deck.getCards());
 		try {
 			processPlayedCard(player, playedCard);
 		} catch (Exception e) {
