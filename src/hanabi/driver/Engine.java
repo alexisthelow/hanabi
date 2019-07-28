@@ -1,5 +1,6 @@
 package hanabi.driver;
 
+import hanabi.cards.Deck;
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
 import hanabi.game.ComputerPlayer;
@@ -24,13 +25,30 @@ public class Engine {
 			game = new Game();
 			do {
 				mainMenu();
-			} while (!startGame || !quitGame);
-			//select variants
-			//add players
-			//proceed with play
+			} while (!startGame && !quitGame);
+			
+			if (!quitGame) {
+				//create a deck
+				game.setDeck(new Deck(game.getColorVariant()));
+				//deal hands to each player
+				if (game.getPlayers().size() > 3) {
+					for (int i = 0; i < 4; i++) {
+						for (AbstractPlayer player : game.getPlayers()) {
+							player.gainCardToHand(game.getDeck().getCards());
+						}
+					}
+				} else {
+					for (int i = 0; i < 5; i++) {
+						for (AbstractPlayer player : game.getPlayers()) {
+							player.gainCardToHand(game.getDeck().getCards());
+						}
+					}
+				}
+				//proceed with play
 				//player cannot discard if clocks == 8; player cannot provide info if clocks == 0
-			//stop one round after cards are gone OR if all fuses are burned OR if grandFinale == true, stop on losing necessary card OR stop when all colors are built to maximum
-			//display score
+				//stop one round after cards are gone OR if all fuses are burned OR if grandFinale == true, stop on losing necessary card OR stop when all colors are built to maximum
+				//display score
+			}
 			
 		} while (!quitGame); //if new game is desired, loop to beginning
 		
@@ -78,11 +96,8 @@ public class Engine {
 				case 4:
 					exitMenu = true;
 					break;
-	
-				default:
-					break;
 			}
-		} while (!exitMenu);
+		} while (!exitMenu && !startGame);
 		
 		
 	}
@@ -188,7 +203,7 @@ public class Engine {
 	}
 	
 	//add player menu
-	public static void addPlayerMenu() {
+	public static void addPlayerMenu() { // TODO only 2-5 players is allowed
 		boolean exitAddPlayerMenu = false;
 		AbstractPlayer newPlayer;
 		

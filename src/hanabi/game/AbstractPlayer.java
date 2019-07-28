@@ -1,6 +1,7 @@
 package hanabi.game;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import hanabi.cards.Card;
 import hanabi.cards.GlobalCardTracker;
@@ -45,8 +46,8 @@ public class AbstractPlayer {
 		return playedCard;
 	}
 	
-	public void gainCardToHand(Card card) {
-		this.hand.add(card);
+	public void gainCardToHand(Stack<Card> deck) {
+		this.hand.add(deck.pop());
 		this.cardInfoTables.add(getNewCardInfoTable());
 	}
 	
