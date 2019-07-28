@@ -19,61 +19,24 @@ public class Engine {
 	private static boolean quitGame = false;
 	
 	public static void main(String[] args) {
-		game = new Game();
 		while (!quitGame) {
-			newGameMenu();
+			mainMenu();
 			
-			if (startGame) {
-				alterPlayersMenu();
-			}
+			System.out.println(game.getColorVariant().toString() + " " + game.getPlayers().size());
 		}
 		
-//		do {
-//			//create new game
-//			game = new Game();
-//			do {
-//				mainMenu();
-//			} while (!startGame && !quitGame);
-//			
-//			if (!quitGame) {
-//				//create a deck
-//				game.setDeck(new Deck(game.getColorVariant()));
-//				//deal hands to each player
-//				if (game.getPlayers().size() > 3) {
-//					for (int i = 0; i < 4; i++) {
-//						for (AbstractPlayer player : game.getPlayers()) {
-//							player.gainCardToHand(game.getDeck().getCards());
-//						}
-//					}
-//				} else {
-//					for (int i = 0; i < 5; i++) {
-//						for (AbstractPlayer player : game.getPlayers()) {
-//							player.gainCardToHand(game.getDeck().getCards());
-//						}
-//					}
-//				}
-//				//proceed with play
-//				//player cannot discard if clocks == 8; player cannot provide info if clocks == 0
-//				//stop one round after cards are gone OR if all fuses are burned OR if grandFinale == true, stop on losing necessary card OR stop when all colors are built to maximum
-//				//display score
-//			}
-//			
-//		} while (!quitGame); //if new game is desired, loop to beginning
-//		
-//		
-//		
 	}
 	
 	//main menu
 	public static void mainMenu() {
-		System.out.println("~Hanabi~");
+		System.out.println("Hanabi");
 		System.out.println("--------");
-		System.out.println("1) Start new game");
-		System.out.println("2) Exit");
-		
+		System.out.println("1) Start game");
+		System.out.println("2) Quit game");
 		switch (srg.intRequest("Make a selection", 1, 2, false)) {
 			case 1:
-				startGame = true;
+				game = new Game();
+				alterPlayersMenu();
 				break;
 			case 2:
 				quitGame = true;
@@ -81,138 +44,45 @@ public class Engine {
 		}
 	}
 	
-	//start new game menu
-	public static void newGameMenu() {
-		boolean exitMenu = false;
-		do {
-			System.out.println("Hanabi");
-			System.out.println("--------");
-			System.out.println("1) Start game");
-			System.out.println("2) Quit game");
-			switch (srg.intRequest("Make a selection", 1, 2, false)) {
-				case 1:
-					startGame = true; 
-					break;
-				case 2:
-					quitGame = true;
-					break;
-			}
-		} while (!quitGame || !startGame);
-		
-		
-	}
-	
-	//select variant menu
-	public static void selectVariantMenu() {
-		boolean exitVariantMenu = false;
-		do {
-			//display grand finale
-			if (game.getVariantGrandFinale() || game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) {
-				System.out.println("1) Grand Finale - ENABLED -");
-			}
-			else {
-				System.out.println("1) Grand Finale");
-			}
-			//display multicolor
-			if (game.getColorVariant().equals(ColorVariant.MULTICOLOR)) {
-				System.out.println("2) Avalanche of Colors - ENABLED -");
-			}
-			else {
-				System.out.println("2) Avalanche of Colors");
-			}
-			//display multicolor single
-			if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_SINGLE)) {
-				System.out.println("3) Avalanche of Colors (Single) - ENABLED -");
-			}
-			else {
-				System.out.println("3) Avalanche of Colors (Single)");
-			}
-			//display multicolor wild
-			if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) {
-				System.out.println("4) Avalanche of Colors (Wild) - ENABLED -");
-			}
-			else {
-				System.out.println("4) Avalanche of Colors (Wild)");
-			}
-			//display back
-			System.out.println("5) Go back");
-			
-			switch (srg.intRequest("Select a variant to enable/disable", 1, 5, false)) {
-				case 1:
-					if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) { // if multicolor wild is enabled, grand finale must also be
-						System.out.println("Avalanche of Colors (Wild) can only be played if Grand Finale is enabled.");
-					}
-					else { // otherwise, set it to the opposite of what it was
-						game.setVariantGrandFinale(!game.getVariantGrandFinale());
-					}
-					break;
-	
-				case 2:
-					game.setColorVariant(ColorVariant.MULTICOLOR);
-					break;
-					
-				case 3:
-					game.setColorVariant(ColorVariant.MULTICOLOR_SINGLE);
-					break;
-					
-				case 4:
-					if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) { // if multicolor wild is already enabled
-						game.setVariantGrandFinale(false); // grand finale must be set to false
-						game.setColorVariant(ColorVariant.NONE); // and colorVariant must be set to none
-					}
-					else { // otherwise enable both
-						game.setVariantGrandFinale(true); 
-						game.setColorVariant(ColorVariant.MULTICOLOR_WILD);
-					}
-					break;
-					
-				case 5:
-					exitVariantMenu = true;
-					break;
-					
-			}
-		} while (!exitVariantMenu);
-		
-	}
-	
 	//alter players menu
 	public static void alterPlayersMenu() {
-		boolean exitMenu = false;
-		do {
-			System.out.println("Add / Remove players");
-			System.out.println("--------");
-			System.out.println("1) Add player");
-			System.out.println("2) Remove player");
-			System.out.println("3) Change first player");
-			System.out.println("4) Continue");
-			switch (srg.intRequest("Make a selection", 1, 4, false)) {
-				case 1:
-					addPlayerMenu();
-					break;
-				case 2:
-					removePlayerMenu();
-					break;
-				case 3:
-					changeFirstPlayerMenu();
-					break;
-				case 4:
-					if (game.getPlayers().size() < 2) { // can't leave menu with fewer than two players
-						System.out.println("Too few players! Please add " + (2 - game.getPlayers().size()) + " more players.");
-					}
-					else if (game.getPlayers().size() > 5) { // can't leave menu with more than five players
-						System.out.println("Too many players! Please remove " + (game.getPlayers().size() - 5) + " players.");
-					}
-					else { // must be all good
-						exitMenu = true;
-					}
-					break;
-			}
-		} while (!exitMenu);
-	}
+			boolean exitMenu = false;
+			do {
+				System.out.println("Add / Remove players");
+				System.out.println("--------");
+				System.out.println("1) Add player");
+				System.out.println("2) Remove player");
+				System.out.println("3) Change first player");
+				System.out.println("4) Continue");
+				switch (srg.intRequest("Make a selection", 1, 4, false)) {
+					case 1:
+						addPlayerMenu();
+						break;
+					case 2:
+						removePlayerMenu();
+						break;
+					case 3:
+						changeFirstPlayerMenu();
+						break;
+					case 4:
+						if (game.getPlayers().size() < 2) { // can't leave menu with fewer than two players
+							System.out.println("Too few players! Please add " + (2 - game.getPlayers().size()) + " more players.");
+						}
+						else if (game.getPlayers().size() > 5) { // can't leave menu with more than five players
+							System.out.println("Too many players! Please remove " + (game.getPlayers().size() - 5) + " players.");
+						}
+						else { // must be all good
+							exitMenu = true;
+						}
+						break;
+				}
+			} while (!exitMenu);
+			selectVariantMenu();
+		}
 	
 	//add player menu
-	public static void addPlayerMenu() { // TODO only 2-5 players is allowed
-		boolean exitAddPlayerMenu = false;
+	public static void addPlayerMenu() { 
+		boolean exitMenu = false;
 		AbstractPlayer newPlayer;
 		
 		do {
@@ -236,12 +106,12 @@ public class Engine {
 					game.getPlayers().add(newPlayer);
 					break;
 				case 3: // exit
-					exitAddPlayerMenu = true;
+					exitMenu = true;
 					break;
 					
 			}
 			
-		} while (!exitAddPlayerMenu);
+		} while (!exitMenu);
 		
 	}
 	
@@ -296,6 +166,77 @@ public class Engine {
 		}
 	}
 	
-	
+	//select variant menu
+	public static void selectVariantMenu() {
+			boolean exitVariantMenu = false;
+			do {
+				//display grand finale
+				if (game.getVariantGrandFinale() || game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) {
+					System.out.println("1) Grand Finale - ENABLED -");
+				}
+				else {
+					System.out.println("1) Grand Finale");
+				}
+				//display multicolor
+				if (game.getColorVariant().equals(ColorVariant.MULTICOLOR)) {
+					System.out.println("2) Avalanche of Colors - ENABLED -");
+				}
+				else {
+					System.out.println("2) Avalanche of Colors");
+				}
+				//display multicolor single
+				if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_SINGLE)) {
+					System.out.println("3) Avalanche of Colors (Single) - ENABLED -");
+				}
+				else {
+					System.out.println("3) Avalanche of Colors (Single)");
+				}
+				//display multicolor wild
+				if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) {
+					System.out.println("4) Avalanche of Colors (Wild) - ENABLED -");
+				}
+				else {
+					System.out.println("4) Avalanche of Colors (Wild)");
+				}
+				//display back
+				System.out.println("5) Continue");
+				
+				switch (srg.intRequest("Select a variant to enable/disable", 1, 5, false)) {
+					case 1:
+						if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) { // if multicolor wild is enabled, grand finale must also be
+							System.out.println("Avalanche of Colors (Wild) can only be played if Grand Finale is enabled.");
+						}
+						else { // otherwise, set it to the opposite of what it was
+							game.setVariantGrandFinale(!game.getVariantGrandFinale());
+						}
+						break;
+		
+					case 2:
+						game.setColorVariant(ColorVariant.MULTICOLOR);
+						break;
+						
+					case 3:
+						game.setColorVariant(ColorVariant.MULTICOLOR_SINGLE);
+						break;
+						
+					case 4:
+						if (game.getColorVariant().equals(ColorVariant.MULTICOLOR_WILD)) { // if multicolor wild is already enabled
+							game.setVariantGrandFinale(false); // grand finale must be set to false
+							game.setColorVariant(ColorVariant.NONE); // and colorVariant must be set to none
+						}
+						else { // otherwise enable both
+							game.setVariantGrandFinale(true); 
+							game.setColorVariant(ColorVariant.MULTICOLOR_WILD);
+						}
+						break;
+						
+					case 5:
+						exitVariantMenu = true;
+						break;
+						
+				}
+			} while (!exitVariantMenu);
+			
+		}
 	
 }
