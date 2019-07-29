@@ -26,8 +26,19 @@ public class Engine {
 			if (startGame) {
 				dealOpeningHand(); //deal cards
 				
-				//at beginning of turn, deduce hand from global tracker
-				//
+				// proceed with normal play
+				
+				// at beginning of turn, deduce hand from global tracker
+				// discover possible actions
+					// if clocks == 0, cannot give info
+					// if clocks == 8, cannot discard
+					
+				// if player is human, ask for move
+				// if computer, discover move
+				// execute move
+					// if discard, regain clock and player gains new card
+					// if play, lose card from hand and regain clock if card number == 5
+					// if give info, lose clock and notify receiving player
 				
 				//at end of turn, check for game end :
 					//necessary card lost OR deck empty and last turn complete?
@@ -257,7 +268,7 @@ public class Engine {
 		int cardsPerHand = game.getPlayers().size() > 3 ? 4 : 5;
 		for (int i = 0; i < cardsPerHand; i++) {
 			for (AbstractPlayer gainingPlayer : game.getPlayers()) {
-				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck());
+				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck(), game.getColorVariant());
 				notifyPlayersOnGainToHand(gainingPlayer, gainedCard);
 			}
 		}

@@ -35,7 +35,7 @@ public class AbstractPlayer {
 		this.personalCardTracker = new PersonalCardTracker(colorVariant);
 		
 		for (Card c : hand) {
-			this.cardInfoTables.add(getNewCardInfoTable());
+			this.cardInfoTables.add(getNewCardInfoTable(colorVariant));
 		}
 	}
 
@@ -49,10 +49,10 @@ public class AbstractPlayer {
 	}
 	
 	//gains card to hand, returns card gained so other players can be updated
-	public Card gainCardToHand(Deck deck) {
+	public Card gainCardToHand(Deck deck, ColorVariant colorVariant) {
 		Card c = deck.getCards().pop();
 		this.hand.add(c);
-		this.cardInfoTables.add(getNewCardInfoTable());
+		this.cardInfoTables.add(getNewCardInfoTable(colorVariant));
 		return c;
 	}
 	
@@ -207,12 +207,15 @@ public class AbstractPlayer {
 	//TODO give info
 	//TODO discard
 	
-	public AttributeTracker[][] getNewCardInfoTable() {
+	public AttributeTracker[][] getNewCardInfoTable(ColorVariant colorVariant) {
 		
 		AttributeTracker[][] cardTable = new AttributeTracker[5][6];
 		for (int i = 0; i < cardTable.length; i++) {
 			for (int j = 0; j < cardTable[i].length; j++) {
 				cardTable[i][j] = new AttributeTracker();
+				if (colorVariant.equals(ColorVariant.NONE) && j == 5) {
+					cardTable[i][j].setColor(FourState.NO);
+				}
 			}
 		}
 		
