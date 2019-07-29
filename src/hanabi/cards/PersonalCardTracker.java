@@ -2,11 +2,11 @@ package hanabi.cards;
 
 import hanabi.game.ColorVariant;
 
-public class GlobalCardTracker {
+public class PersonalCardTracker {
 	
 	Integer[][] cards = new Integer[5][6];
 
-	public GlobalCardTracker(ColorVariant colorVariant) {
+	public PersonalCardTracker(ColorVariant colorVariant) {
 		super();
 		if (colorVariant.equals(ColorVariant.NONE)) { // no color variant
 			for (int i = 0; i < cards.length; i++) {

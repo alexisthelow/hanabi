@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import hanabi.cards.Card;
 import hanabi.cards.Deck;
-import hanabi.cards.GlobalCardTracker;
+import hanabi.cards.PersonalCardTracker;
 import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.FourState;
@@ -13,26 +13,26 @@ public class AbstractPlayer {
 	
 	private ArrayList<Card> hand;
 	private ArrayList<AttributeTracker[][]> cardInfoTables = new ArrayList<AttributeTracker[][]>();
-	private GlobalCardTracker globalCardTracker;
+	private PersonalCardTracker globalCardTracker;
 	private String name;
 	
 	public AbstractPlayer() {
 		this.name = "unknown";
 		this.hand = new ArrayList<Card>();
-		this.globalCardTracker = new GlobalCardTracker(ColorVariant.NONE);
+		this.globalCardTracker = new PersonalCardTracker(ColorVariant.NONE);
 
 	}
 
 	public AbstractPlayer(String name, ColorVariant colorVariant) {
 		this.name = name;
-		this.globalCardTracker = new GlobalCardTracker(colorVariant);
+		this.globalCardTracker = new PersonalCardTracker(colorVariant);
 	}
 
 	public AbstractPlayer(String name, ArrayList<Card> hand, ColorVariant colorVariant) {
 		super();
 		this.name = name;
 		this.hand = hand;
-		this.globalCardTracker = new GlobalCardTracker(colorVariant);
+		this.globalCardTracker = new PersonalCardTracker(colorVariant);
 		
 		for (Card c : hand) {
 			this.cardInfoTables.add(getNewCardInfoTable());
@@ -195,14 +195,13 @@ public class AbstractPlayer {
 		}
 	}
 	
-	//TODO deduce from visible cards
 	public void deduceFromGlobalCardTracker() {
-		Integer[][] gct = this.globalCardTracker.getCards();
+		Integer[][] pct = this.globalCardTracker.getCards();
 		
 		
-		for (int i = 0; i < gct.length; i++) { // iterate over each cell
-			for (int j = 0; j < gct[i].length; j++) {
-				if (gct[i][j] == 0) { // if a zero is found
+		for (int i = 0; i < pct.length; i++) { // iterate over each cell
+			for (int j = 0; j < pct[i].length; j++) {
+				if (pct[i][j] == 0) { // if a zero is found
 					for (AttributeTracker[][] at : this.cardInfoTables) { // none of the cards in hand can be that card, so set the color and number fourstate of the relevant attribute tracker cell to nos
 						at[i][j].setColor(FourState.NO);
 						at[i][j].setNumber(FourState.NO);
@@ -211,6 +210,7 @@ public class AbstractPlayer {
 			}
 		}
 	}
+	
 	//TODO give info
 	//TODO discard
 	
@@ -243,11 +243,11 @@ public class AbstractPlayer {
 		this.cardInfoTables = cardInfoTables;
 	}
 
-	public GlobalCardTracker getGlobalCardTracker() {
+	public PersonalCardTracker getGlobalCardTracker() {
 		return globalCardTracker;
 	}
 
-	public void setGlobalCardTracker(GlobalCardTracker globalCardTracker) {
+	public void setGlobalCardTracker(PersonalCardTracker globalCardTracker) {
 		this.globalCardTracker = globalCardTracker;
 	}
 

@@ -6,18 +6,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import hanabi.cards.Card;
-import hanabi.cards.GlobalCardTracker;
+import hanabi.cards.PersonalCardTracker;
 import hanabi.cards.identifiers.Color;
 import hanabi.cards.identifiers.Number;
 import hanabi.game.ColorVariant;
 
 class GlobalCardTrackerTest {
 	
-	GlobalCardTracker gct;
+	PersonalCardTracker gct;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		gct = new GlobalCardTracker(ColorVariant.MULTICOLOR);
+		gct = new PersonalCardTracker(ColorVariant.MULTICOLOR);
 	}
 
 	@AfterEach

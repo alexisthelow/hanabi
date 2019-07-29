@@ -26,7 +26,8 @@ public class Engine {
 			if (startGame) {
 				dealOpeningHand(); //deal cards
 				
-				//at beginning of turn, 
+				//at beginning of turn, deduce hand from global tracker
+				//
 				
 				//at end of turn, check for game end :
 					//necessary card lost OR deck empty and last turn complete?
@@ -251,23 +252,23 @@ public class Engine {
 			
 		}
 	
+	//deal opening hand and notify 
 	public static void dealOpeningHand() {
 		int cardsPerHand = game.getPlayers().size() > 3 ? 4 : 5;
 		for (int i = 0; i < cardsPerHand; i++) {
 			for (AbstractPlayer gainingPlayer : game.getPlayers()) {
 				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck());
-				for (AbstractPlayer nonGainingPlayer : game.getPlayers()) {
-					if (!nonGainingPlayer.equals(gainingPlayer)) {
-						try {
-							nonGainingPlayer.getGlobalCardTracker().cardSeen(gainedCard);
-						} catch (Exception e) {
-							System.out.println(e.getMessage());
-							e.printStackTrace();
-						}
-					}
-				}
+				notifyPlayersOnDraw(gainingPlayer, gainedCard);
 			}
-		} 
+		}
+	} 
+	
+	public static void notifyPlayersOnDraw(AbstractPlayer gainingPlayer, Card card) {
+		for (AbstractPlayer nonGainingPlayer : game.getPlayers()) {
+			if (!nonGainingPlayer.equals(gainingPlayer)) {
+				nonGainingPlayer.getGlobalCardTracker().cardSeen(card);
+			}
+		}
 	}
 	
 }
