@@ -252,23 +252,29 @@ public class Engine {
 			
 		}
 	
-	//deal opening hand and notify 
+	//deal opening hand
 	public static void dealOpeningHand() {
 		int cardsPerHand = game.getPlayers().size() > 3 ? 4 : 5;
 		for (int i = 0; i < cardsPerHand; i++) {
 			for (AbstractPlayer gainingPlayer : game.getPlayers()) {
 				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck());
-				notifyPlayersOnDraw(gainingPlayer, gainedCard);
+				notifyPlayersOnGainToHand(gainingPlayer, gainedCard);
 			}
 		}
 	} 
 	
-	public static void notifyPlayersOnDraw(AbstractPlayer gainingPlayer, Card card) {
+	//notifies all non-drawing players to decrement card from personal tracker
+	public static void notifyPlayersOnGainToHand(AbstractPlayer gainingPlayer, Card card) {
 		for (AbstractPlayer nonGainingPlayer : game.getPlayers()) {
 			if (!nonGainingPlayer.equals(gainingPlayer)) {
 				nonGainingPlayer.getGlobalCardTracker().cardSeen(card);
 			}
 		}
+	}
+	
+	// notifies player to update personal tracker after play or discard
+	public static void notifyPlayerOnPlayOrDiscard(AbstractPlayer playingPlayer, Card card) {
+		playingPlayer.getGlobalCardTracker().cardSeen(card);
 	}
 	
 }
