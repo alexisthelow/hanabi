@@ -164,7 +164,7 @@ public class Game {
 		for (AbstractPlayer player : players) {
 			if (player != drawingPlayer) {
 				try {
-					player.getGlobalCardTracker().cardSeen(card);
+					player.getPersonalCardTracker().cardSeen(card);
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					e.printStackTrace();
@@ -179,7 +179,7 @@ public class Game {
 			return;
 		}
 		try {
-			player.getGlobalCardTracker().cardSeen(card);
+			player.getPersonalCardTracker().cardSeen(card);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

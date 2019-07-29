@@ -53,12 +53,12 @@ class AbstractPlayerTest {
 		handIndices.remove(0);
 		handIndices.add(2);
 		player.receiveInfo(handIndices, Color.RED, ColorVariant.MULTICOLOR);
-		System.out.println(player.getGlobalCardTracker().toString());
+		System.out.println(player.getPersonalCardTracker().toString());
 		handIndices.remove(0);
 		handIndices.add(0);
 		handIndices.add(1);
 		player.receiveInfo(handIndices, Color.MULTICOLOR, ColorVariant.MULTICOLOR);
-		System.out.println(player.getGlobalCardTracker().toString());
+		System.out.println(player.getPersonalCardTracker().toString());
 		
 	}
 

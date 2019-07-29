@@ -267,14 +267,14 @@ public class Engine {
 	public static void notifyPlayersOnGainToHand(AbstractPlayer gainingPlayer, Card card) {
 		for (AbstractPlayer nonGainingPlayer : game.getPlayers()) {
 			if (!nonGainingPlayer.equals(gainingPlayer)) {
-				nonGainingPlayer.getGlobalCardTracker().cardSeen(card);
+				nonGainingPlayer.getPersonalCardTracker().cardSeen(card);
 			}
 		}
 	}
 	
 	// notifies player to update personal tracker after play or discard
 	public static void notifyPlayerOnPlayOrDiscard(AbstractPlayer playingPlayer, Card card) {
-		playingPlayer.getGlobalCardTracker().cardSeen(card);
+		playingPlayer.getPersonalCardTracker().cardSeen(card);
 	}
 	
 }

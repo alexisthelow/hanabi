@@ -13,26 +13,26 @@ public class AbstractPlayer {
 	
 	private ArrayList<Card> hand;
 	private ArrayList<AttributeTracker[][]> cardInfoTables = new ArrayList<AttributeTracker[][]>();
-	private PersonalCardTracker globalCardTracker;
+	private PersonalCardTracker personalCardTracker;
 	private String name;
 	
 	public AbstractPlayer() {
 		this.name = "unknown";
 		this.hand = new ArrayList<Card>();
-		this.globalCardTracker = new PersonalCardTracker(ColorVariant.NONE);
+		this.personalCardTracker = new PersonalCardTracker(ColorVariant.NONE);
 
 	}
 
 	public AbstractPlayer(String name, ColorVariant colorVariant) {
 		this.name = name;
-		this.globalCardTracker = new PersonalCardTracker(colorVariant);
+		this.personalCardTracker = new PersonalCardTracker(colorVariant);
 	}
 
 	public AbstractPlayer(String name, ArrayList<Card> hand, ColorVariant colorVariant) {
 		super();
 		this.name = name;
 		this.hand = hand;
-		this.globalCardTracker = new PersonalCardTracker(colorVariant);
+		this.personalCardTracker = new PersonalCardTracker(colorVariant);
 		
 		for (Card c : hand) {
 			this.cardInfoTables.add(getNewCardInfoTable());
@@ -42,7 +42,7 @@ public class AbstractPlayer {
 	public Card playCard(int handIndex) { //return true if successful; return false if not
 		Card playedCard = this.hand.remove(handIndex);
 		this.cardInfoTables.remove(handIndex);
-		this.globalCardTracker.cardSeen(playedCard);
+		this.personalCardTracker.cardSeen(playedCard);
 		//TODO draw card
 		
 		return playedCard;
@@ -182,12 +182,7 @@ public class AbstractPlayer {
 				for (Integer k = 0; k < currentCardTable[j].length; k++) { // for each column in that row
 					if (currentCardTable[j][k].getColor().equals(FourState.YES) && currentCardTable[j][k].getNumber().equals(FourState.YES) && !this.hand.get(i).getOwningPlayerDeducedIdentity()) { // if both color and number are yes at that location
 						this.hand.get(i).setOwningPlayerDeducedIdentity(true);
-						try {
-							this.globalCardTracker.cardSeen(new Card(j, k));
-						} catch (Exception e) {
-							System.out.println(e.getMessage());
-							e.printStackTrace();
-						}
+						this.personalCardTracker.cardSeen(new Card(j, k));
 					}
 				}
 				
@@ -195,10 +190,8 @@ public class AbstractPlayer {
 		}
 	}
 	
-	public void deduceFromGlobalCardTracker() {
-		Integer[][] pct = this.globalCardTracker.getCards();
-		
-		
+	public void deduceFromPersonalCardTracker() {
+		Integer[][] pct = this.personalCardTracker.getCards();
 		for (int i = 0; i < pct.length; i++) { // iterate over each cell
 			for (int j = 0; j < pct[i].length; j++) {
 				if (pct[i][j] == 0) { // if a zero is found
@@ -243,12 +236,12 @@ public class AbstractPlayer {
 		this.cardInfoTables = cardInfoTables;
 	}
 
-	public PersonalCardTracker getGlobalCardTracker() {
-		return globalCardTracker;
+	public PersonalCardTracker getPersonalCardTracker() {
+		return personalCardTracker;
 	}
 
-	public void setGlobalCardTracker(PersonalCardTracker globalCardTracker) {
-		this.globalCardTracker = globalCardTracker;
+	public void setPersonalCardTracker(PersonalCardTracker personalCardTracker) {
+		this.personalCardTracker = personalCardTracker;
 	}
 
 	public String getName() {
