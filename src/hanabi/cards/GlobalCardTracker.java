@@ -74,39 +74,8 @@ public class GlobalCardTracker {
 		}
 	}
 	
-	public void cardSeen(Card card) throws Exception {
-		int colorIndex;
-		
-		switch (card.getColor()) {
-			case BLUE:
-				colorIndex = 0;
-				break;
-				
-			case GREEN:
-				colorIndex = 1;
-				break;
-				
-			case RED:
-				colorIndex = 2;
-				break;
-			
-			case WHITE:
-				colorIndex = 3;
-				break;
-			
-			case YELLOW:
-				colorIndex = 4;
-				break;
-			
-			case MULTICOLOR:
-				colorIndex = 5;
-				break;
-	
-			default:
-				throw new Exception("GlobalCardTracker.cardSeen() was unable to find the correct color for card " + card.toString());
-		}
-		
-		cards[card.getNumber().getValue()][colorIndex]--;
+	public void cardSeen(Card card) {
+		this.cards[card.getNumber().getValue()][card.getColor().getValue()]--;
 	}
 	
 	public Integer[][] getCards() {

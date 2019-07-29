@@ -42,7 +42,9 @@ public class AbstractPlayer {
 	public Card playCard(int handIndex) { //return true if successful; return false if not
 		Card playedCard = this.hand.remove(handIndex);
 		this.cardInfoTables.remove(handIndex);
+		this.globalCardTracker.cardSeen(playedCard);
 		//TODO draw card
+		
 		return playedCard;
 	}
 	
@@ -194,6 +196,21 @@ public class AbstractPlayer {
 	}
 	
 	//TODO deduce from visible cards
+	public void deduceFromGlobalCardTracker() {
+		Integer[][] gct = this.globalCardTracker.getCards();
+		
+		
+		for (int i = 0; i < gct.length; i++) { // iterate over each cell
+			for (int j = 0; j < gct[i].length; j++) {
+				if (gct[i][j] == 0) { // if a zero is found
+					for (AttributeTracker[][] at : this.cardInfoTables) { // none of the cards in hand can be that card, so set the color and number fourstate of the relevant attribute tracker cell to nos
+						at[i][j].setColor(FourState.NO);
+						at[i][j].setNumber(FourState.NO);
+					}
+				}
+			}
+		}
+	}
 	//TODO give info
 	//TODO discard
 	
