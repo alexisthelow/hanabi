@@ -43,8 +43,6 @@ public class AbstractPlayer {
 		Card playedCard = this.hand.remove(handIndex);
 		this.cardInfoTables.remove(handIndex);
 		this.personalCardTracker.cardSeen(playedCard);
-		//TODO draw card
-		
 		return playedCard;
 	}
 	
