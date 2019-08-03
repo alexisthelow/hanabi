@@ -25,10 +25,23 @@ public class Engine {
 			
 			if (startGame) {
 				dealOpeningHand(); //deal cards
+				do { // proceed with normal play
+					for (AbstractPlayer currentPlayer : game.getPlayers()) {
+						currentPlayer.deduceFromPersonalCardTracker(); // deduce hand from global tracker
+						
+						if (currentPlayer instanceof ComputerPlayer) { // current player is the computer
+							
+						}
+						else { // current player is the computer
+							
+						}
+					}
+					
+					
+					
+				} while (!game.isGameOver());
 				
-				// proceed with normal play
 				
-				// at beginning of turn, deduce hand from global tracker
 				// discover possible actions
 					// if clocks == 0, cannot give info
 					// if clocks == 8, cannot discard
@@ -286,6 +299,28 @@ public class Engine {
 	// notifies player to update personal tracker after play or discard
 	public static void notifyPlayerOnPlayOrDiscard(AbstractPlayer playingPlayer, Card card) {
 		playingPlayer.getPersonalCardTracker().cardSeen(card);
+	}
+	
+	public static void requestMoveFromPlayer() {
+		// first discover what player can do
+		boolean giveInfoPossible = true;
+		boolean discardPossible = true;
+		
+		if (game.getClocks() == 0) { 
+			giveInfoPossible = false;
+		}
+		if (game.getClocks() == 8) {
+			discardPossible = false;
+		}
+		
+		// request move type
+		// if give info
+			// request target player
+			// request info type
+			// discover indices of cards with indicated info type
+		// if play/discard
+			// request target card index
+		//return
 	}
 	
 }

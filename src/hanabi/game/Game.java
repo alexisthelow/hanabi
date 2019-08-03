@@ -24,7 +24,7 @@ public class Game {
 	private int fuses;
 	
 	//states
-	private static boolean gameOver;
+	private boolean gameOver;
 	
 	public Game() {
 		this.clocks = 8;
@@ -248,6 +248,14 @@ public class Game {
 
 	public void setFuses(int fuses) {
 		this.fuses = fuses;
+	}
+
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
 	}
 	
 }
