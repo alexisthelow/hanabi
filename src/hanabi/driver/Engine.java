@@ -409,4 +409,17 @@ public class Engine {
 		return attributeList.get(srg.intRequest("Select a " + attributeType, 1, attributeList.size(), false) - 1);
 	}
 	
+	//accepts a target player and specific cardAttribute (e.g., Color.BLUE, Number.ONE) and returns list of indices of cards with that attribute
+	public static List<Integer> discoverHandIndicesByCardAttribute(AbstractPlayer targetPlayer, CardAttribute cardAttribute) {
+		List<Integer> handIndices = new ArrayList<Integer>();
+		int counter = 0;
+		for (Card c: targetPlayer.getHand()) {
+			if (c.getColor().equals(cardAttribute) || c.getNumber().equals(cardAttribute)) { // if the card in current iteration has the indicated cardAttribute
+				handIndices.add(counter);
+			}
+			counter++;
+		}
+		return handIndices;
+	}
+	
 }
