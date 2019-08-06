@@ -1,7 +1,11 @@
 package hanabi.driver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hanabi.cards.Card;
-import hanabi.cards.identifiers.CardAttribute;
+import hanabi.cards.identifiers.*;
+import hanabi.cards.identifiers.Number;
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
 import hanabi.game.ComputerPlayer;
@@ -369,16 +373,40 @@ public class Engine {
 	// returns an abstractPlayer for the purpose of giving info 
 	public static AbstractPlayer requestTargetPlayer(HumanPlayer currentPlayer) {
 		int playerCounter = 0;
-		for (AbstractPlayer targetablePlayer : game.getPlayers()) {
-			if (!targetablePlayer.equals(currentPlayer)) { // as long as the player in the current iteration is not the current player 
-				System.out.println(); // print out a number and their name
-			}
+		ArrayList<AbstractPlayer> targetablePlayers = game.getPlayers(); // get the list of players
+		targetablePlayers.remove(currentPlayer); // remove the current player from consideration
+		for (AbstractPlayer targetablePlayer : targetablePlayers) {
+			System.out.println(++playerCounter + ") " + targetablePlayer.getName());
 		}
+		return targetablePlayers.get(srg.intRequest("Select a player", 1, targetablePlayers.size(), false) - 1);
 	}
 	
-	//returns a cardAttribute for the purpose of giving info
-	public static CardAttribute requestCardAttributeType() {
-		
+	//returns a cardAttribute type for the purpose of giving info
+	public static String requestCardAttributeType() {
+		String attributeType;
+		System.out.println("1) Color");
+		System.out.println("2) Number");
+		switch (srg.intRequest("Select a card attribute", 1, 2, false)) {
+			case 1:
+				attributeType = "color";
+				break;
+			case 2:
+				attributeType = "number";
+				break;
+			default: // sigh
+				attributeType = "crashnowplz";
+		}
+		return attributeType;
+	}
+	
+	//returns a specific cardAttribute for the purpose of giving info
+	public static CardAttribute requestSpecificCardAttribute(String attributeType) {
+		List<CardAttribute> attributeList = attributeType.equalsIgnoreCase("color") ? Color.getListOfColors() : Number.getListOfNumbers();
+		int counter = 0;
+		for (CardAttribute cardAttribute : attributeList) {
+			System.out.println(++counter + ") " + cardAttribute.getName());
+		}
+		return attributeList.get(srg.intRequest("Select a " + attributeType, 1, attributeList.size(), false) - 1);
 	}
 	
 }
