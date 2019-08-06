@@ -306,7 +306,7 @@ public class Engine {
 		playingPlayer.getPersonalCardTracker().cardSeen(card);
 	}
 	
-	public static void requestMoveFromPlayer(HumanPlayer currentPlayer) { // this should only be called for a human player
+	public static Move requestMoveFromPlayer(HumanPlayer currentPlayer) { // this should only be called for a human player
 		// first discover what player can do
 		boolean giveInfoPossible = game.isGiveInfoPossible();
 		boolean discardPossible = game.isDiscardPossible();
@@ -350,19 +350,16 @@ public class Engine {
 				break;
 		}
 		if (newMove.getMoveType().equals(MoveType.PLAY_CARD) || newMove.getMoveType().equals(MoveType.DISCARD_CARD)) { // movetype is play card or discard, get single index
-			 newMove.setSingleTargetHandIndex(requestSingleHandIndexFromPlayer(currentPlayer, newMove.getMoveType()));
+			newMove.setTargetPlayer(currentPlayer);
+			newMove.setSingleTargetHandIndex(requestSingleHandIndexFromPlayer(currentPlayer, newMove.getMoveType()));
 		}
 		else { // movetype is give info, request target player, request color or number
-			
+			newMove.setTargetPlayer(requestTargetPlayer(currentPlayer));
+			newMove.setTargetHandIndices(discoverHandIndicesByCardAttribute(newMove.getTargetPlayer(), requestSpecificCardAttribute(requestCardAttributeType()))); // woah
 		}
+		//the move should now be complete!
+		return newMove;
 		
-		// if give info
-			// request target player
-			// request info type
-			// discover indices of cards with indicated info type
-		// if play/discard
-			// request target card index
-		//return
 	}
 	
 	//returns an int indicating a hand index, value corrected to zero start
@@ -410,8 +407,8 @@ public class Engine {
 	}
 	
 	//accepts a target player and specific cardAttribute (e.g., Color.BLUE, Number.ONE) and returns list of indices of cards with that attribute
-	public static List<Integer> discoverHandIndicesByCardAttribute(AbstractPlayer targetPlayer, CardAttribute cardAttribute) {
-		List<Integer> handIndices = new ArrayList<Integer>();
+	public static ArrayList<Integer> discoverHandIndicesByCardAttribute(AbstractPlayer targetPlayer, CardAttribute cardAttribute) {
+		ArrayList<Integer> handIndices = new ArrayList<Integer>();
 		int counter = 0;
 		for (Card c: targetPlayer.getHand()) {
 			if (c.getColor().equals(cardAttribute) || c.getNumber().equals(cardAttribute)) { // if the card in current iteration has the indicated cardAttribute
