@@ -1,6 +1,8 @@
 package hanabi.cards.identifiers;
 
-import java.util.EnumSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum Color implements CardAttribute {
 	
@@ -31,7 +33,7 @@ public enum Color implements CardAttribute {
 		return "color";
 	}
 	
-	public static EnumSet<Color> getSetOfColors() {
-		return EnumSet.allOf(Color.class);
+	public static List<CardAttribute> getListOfColors() {
+		return new ArrayList<CardAttribute>(Arrays.asList(Color.values()));
 	}
 }
