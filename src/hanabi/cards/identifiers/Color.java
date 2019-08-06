@@ -1,5 +1,7 @@
 package hanabi.cards.identifiers;
 
+import java.util.EnumSet;
+
 public enum Color implements CardAttribute {
 	
 	BLUE("Blue", 0), GREEN("Green", 1), RED("Red", 2), YELLOW("Yellow", 3),  WHITE("White", 4), MULTICOLOR("Multicolor", 5);
@@ -29,4 +31,7 @@ public enum Color implements CardAttribute {
 		return "color";
 	}
 	
+	public static EnumSet<Color> getSetOfColors() {
+		return EnumSet.allOf(Color.class);
+	}
 }

@@ -1,5 +1,7 @@
 package hanabi.cards.identifiers;
 
+import java.util.EnumSet;
+
 public enum Number implements CardAttribute {
 	
 	ONE("One", 0), TWO("Two", 1), THREE("Three", 2), FOUR("Four", 3), FIVE("Five", 4);
@@ -27,6 +29,10 @@ public enum Number implements CardAttribute {
 	@Override
 	public String getAttributeType() {
 		return "number";
+	}
+	
+	public static EnumSet<Number> getSetOfNumbers() {
+		return EnumSet.allOf(Number.class);
 	}
 	
 }
