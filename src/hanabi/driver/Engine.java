@@ -306,6 +306,7 @@ public class Engine {
 		playingPlayer.getPersonalCardTracker().cardSeen(card);
 	}
 	
+	// returns a move built from requested: moveType, targetPlayer, handIndices
 	public static Move requestMoveFromPlayer(HumanPlayer currentPlayer) { // this should only be called for a human player
 		// first discover what player can do
 		boolean giveInfoPossible = game.isGiveInfoPossible();
