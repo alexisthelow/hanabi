@@ -44,7 +44,7 @@ public class Move {
 		this.targetHandIndices = targetHandIndices;
 	}
 	public void setSingleTargetHandIndex(int targetIndex) {
-		
+		this.targetHandIndices.add(targetIndex);
 	}
 	
 }
