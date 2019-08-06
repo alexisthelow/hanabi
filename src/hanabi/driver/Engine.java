@@ -305,6 +305,9 @@ public class Engine {
 		// first discover what player can do
 		boolean giveInfoPossible = true;
 		boolean discardPossible = true;
+		int numberOfOptions;
+		Move newMove = new Move();
+		MoveType secondOption;
 		
 		if (game.getClocks() == 0) { 
 			giveInfoPossible = false;
@@ -314,6 +317,44 @@ public class Engine {
 		}
 		
 		// request move type
+		System.out.println("1) Play a card");
+		if (discardPossible && giveInfoPossible) {
+			System.out.println("2) Discard a card");
+			System.out.println("3) Give information");
+			numberOfOptions = 3;
+			secondOption = MoveType.DISCARD_CARD;
+		}
+		else if (discardPossible) {
+			System.out.println("2) Discard a card");
+			numberOfOptions = 2;
+			secondOption = MoveType.DISCARD_CARD;
+		}
+		else if (giveInfoPossible) {
+			System.out.println("2) Give information");
+			numberOfOptions = 2;
+			secondOption = MoveType.GIVE_INFO;
+		}
+		else { // unreachable code, but won't compile without this else statement
+			numberOfOptions = 1; 
+			secondOption = MoveType.DISCARD_CARD;
+		}
+		switch (srg.intRequest("Make a selection", 1, numberOfOptions, false)) {
+			case 1:
+				newMove.setMoveType(MoveType.PLAY_CARD);
+				break;
+	
+			case 2:
+				newMove.setMoveType(secondOption);
+				break;
+				
+			case 3:
+				newMove.setMoveType(MoveType.GIVE_INFO);
+				break;
+				
+			default:
+				break;
+		}
+		
 		// if give info
 			// request target player
 			// request info type

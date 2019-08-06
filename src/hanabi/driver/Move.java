@@ -10,8 +10,9 @@ public class Move {
 	private AbstractPlayer targetPlayer;
 	private ArrayList<Integer> targetHandIndices;
 	
+	public Move() {}
+	
 	public Move(MoveType moveType, AbstractPlayer targetPlayer, ArrayList<Integer> targetHandIndices) {
-		super();
 		this.moveType = moveType;
 		this.targetPlayer = targetPlayer;
 		this.targetHandIndices = targetHandIndices;
