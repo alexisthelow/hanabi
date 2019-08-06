@@ -301,20 +301,13 @@ public class Engine {
 		playingPlayer.getPersonalCardTracker().cardSeen(card);
 	}
 	
-	public static void requestMoveFromPlayer() {
+	public static void requestMoveFromPlayer(HumanPlayer currentPlayer) { // this should only be called for a human player
 		// first discover what player can do
-		boolean giveInfoPossible = true;
-		boolean discardPossible = true;
+		boolean giveInfoPossible = game.isGiveInfoPossible();
+		boolean discardPossible = game.isDiscardPossible();
 		int numberOfOptions;
 		Move newMove = new Move();
 		MoveType secondOption;
-		
-		if (game.getClocks() == 0) { 
-			giveInfoPossible = false;
-		}
-		if (game.getClocks() == 8) {
-			discardPossible = false;
-		}
 		
 		// request move type
 		System.out.println("1) Play a card");
@@ -334,7 +327,7 @@ public class Engine {
 			numberOfOptions = 2;
 			secondOption = MoveType.GIVE_INFO;
 		}
-		else { // unreachable code, but won't compile without this else statement
+		else { // unreachable code, but won't compile without this else statement, hope it never causes a problem!! lol
 			numberOfOptions = 1; 
 			secondOption = MoveType.DISCARD_CARD;
 		}
@@ -350,9 +343,15 @@ public class Engine {
 			case 3:
 				newMove.setMoveType(MoveType.GIVE_INFO);
 				break;
-				
-			default:
-				break;
+		}
+		if (newMove.getMoveType().equals(MoveType.PLAY_CARD)) { // movetype is play card
+			
+		}
+		else if (newMove.getMoveType().equals(MoveType.GIVE_INFO)) { // movetype is give info
+			
+		}
+		else { // movetype must be discard
+			
 		}
 		
 		// if give info
@@ -362,6 +361,11 @@ public class Engine {
 		// if play/discard
 			// request target card index
 		//return
+	}
+	
+	//returns an int indicating a hand index corrected to zero start
+	public int requestSingleHandIndexFromPlayer(HumanPlayer currentPlayer, MoveType moveType) {
+		return srg.intRequest("Select a card from your hand to " + moveType.getActionName(), 1, currentPlayer.getHand().size(), false) - 1;
 	}
 	
 }

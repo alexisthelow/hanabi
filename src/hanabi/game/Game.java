@@ -257,5 +257,11 @@ public class Game {
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
 	}
+	public boolean isGiveInfoPossible() {
+		return this.clocks == 0 ? false : true;
+	}
+	public boolean isDiscardPossible() {
+		return this.clocks == 8 ? false : true;
+	}
 	
 }
