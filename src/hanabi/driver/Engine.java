@@ -1,6 +1,7 @@
 package hanabi.driver;
 
 import hanabi.cards.Card;
+import hanabi.cards.identifiers.CardAttribute;
 import hanabi.game.AbstractPlayer;
 import hanabi.game.ColorVariant;
 import hanabi.game.ComputerPlayer;
@@ -344,13 +345,10 @@ public class Engine {
 				newMove.setMoveType(MoveType.GIVE_INFO);
 				break;
 		}
-		if (newMove.getMoveType().equals(MoveType.PLAY_CARD)) { // movetype is play card
-			
+		if (newMove.getMoveType().equals(MoveType.PLAY_CARD) || newMove.getMoveType().equals(MoveType.DISCARD_CARD)) { // movetype is play card or discard, get single index
+			 newMove.setSingleTargetHandIndex(requestSingleHandIndexFromPlayer(currentPlayer, newMove.getMoveType()));
 		}
-		else if (newMove.getMoveType().equals(MoveType.GIVE_INFO)) { // movetype is give info
-			
-		}
-		else { // movetype must be discard
+		else { // movetype is give info, request target player, request color or number
 			
 		}
 		
@@ -363,9 +361,24 @@ public class Engine {
 		//return
 	}
 	
-	//returns an int indicating a hand index corrected to zero start
-	public int requestSingleHandIndexFromPlayer(HumanPlayer currentPlayer, MoveType moveType) {
+	//returns an int indicating a hand index, value corrected to zero start
+	public static int requestSingleHandIndexFromPlayer(HumanPlayer currentPlayer, MoveType moveType) {
 		return srg.intRequest("Select a card from your hand to " + moveType.getActionName(), 1, currentPlayer.getHand().size(), false) - 1;
+	}
+	
+	// returns an abstractPlayer for the purpose of giving info 
+	public static AbstractPlayer requestTargetPlayer(HumanPlayer currentPlayer) {
+		int playerCounter = 0;
+		for (AbstractPlayer targetablePlayer : game.getPlayers()) {
+			if (!targetablePlayer.equals(currentPlayer)) { // as long as the player in the current iteration is not the current player 
+				System.out.println(); // print out a number and their name
+			}
+		}
+	}
+	
+	//returns a cardAttribute for the purpose of giving info
+	public static CardAttribute requestCardAttributeType() {
+		
 	}
 	
 }

@@ -10,7 +10,9 @@ public class Move {
 	private AbstractPlayer targetPlayer;
 	private ArrayList<Integer> targetHandIndices;
 	
-	public Move() {}
+	public Move() {
+		this.targetHandIndices = new ArrayList<Integer>();
+	}
 	
 	public Move(MoveType moveType, AbstractPlayer targetPlayer, ArrayList<Integer> targetHandIndices) {
 		this.moveType = moveType;
@@ -40,6 +42,9 @@ public class Move {
 
 	public void setTargetHandIndices(ArrayList<Integer> targetHandIndices) {
 		this.targetHandIndices = targetHandIndices;
+	}
+	public void setSingleTargetHandIndex(int targetIndex) {
+		
 	}
 	
 }
