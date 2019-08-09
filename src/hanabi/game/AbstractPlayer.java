@@ -39,6 +39,7 @@ public class AbstractPlayer {
 		}
 	}
 
+	// removes card from hand, removes relevant cardInfoTable, notes card on personal tracker, returns played card
 	public Card playCard(int handIndex) { //return true if successful; return false if not
 		Card playedCard = this.hand.remove(handIndex);
 		this.cardInfoTables.remove(handIndex);
@@ -46,7 +47,7 @@ public class AbstractPlayer {
 		return playedCard;
 	}
 	
-	//gains card to hand, returns card gained so other players can be updated
+	//gains card to hand, adds new cardInfoTable, returns card gained so other players can be updated
 	public Card drawCard(Deck deck, ColorVariant colorVariant) {
 		Card c = deck.getCards().pop();
 		this.hand.add(c);
