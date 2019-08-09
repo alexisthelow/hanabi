@@ -19,54 +19,61 @@ public class Card implements Comparable {
 	public Card(Integer colorValue, Integer numberValue) {
 		
 		switch (numberValue) {
-		
-		case 0:
-			this.number = Number.ONE;
-			break;
-		
-		case 1: 
-			this.number = Number.TWO;
-			break;
-		
-		case 2:
-			this.number = Number.THREE;
-			break;
-		
-		case 3:
-			this.number = Number.FOUR;
-			break;
-		
-		case 4:
-			this.number = Number.FIVE;
-			break;
-
+			
+			case 0:
+				this.number = Number.ONE;
+				break;
+			
+			case 1: 
+				this.number = Number.TWO;
+				break;
+			
+			case 2:
+				this.number = Number.THREE;
+				break;
+			
+			case 3:
+				this.number = Number.FOUR;
+				break;
+			
+			case 4:
+				this.number = Number.FIVE;
+				break;
+				
+			default:
+				this.number = Number.ONE;
+				break;
 		}
 		
 		switch (colorValue) {
-		
-		case 0:
-			this.color = Color.BLUE;
-			break;
-
-		case 1:
-			this.color = Color.GREEN;
-			break;
 			
-		case 2:
-			this.color = Color.RED;
-			break;
-			
-		case 3:
-			this.color = Color.WHITE;
-			break;
-			
-		case 4: 
-			this.color = Color.YELLOW;
-			break;
-			
-		case 5:
-			this.color = Color.MULTICOLOR;
-			break;
+			case 0:
+				this.color = Color.BLUE;
+				break;
+	
+			case 1:
+				this.color = Color.GREEN;
+				break;
+				
+			case 2:
+				this.color = Color.RED;
+				break;
+				
+			case 3:
+				this.color = Color.WHITE;
+				break;
+				
+			case 4: 
+				this.color = Color.YELLOW;
+				break;
+				
+			case 5:
+				this.color = Color.MULTICOLOR;
+				break;
+				
+			default:
+				this.color = Color.BLUE;
+				break;
 		}
 		this.ownerIdentified = false;
 	}
