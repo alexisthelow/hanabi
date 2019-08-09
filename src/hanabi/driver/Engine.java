@@ -31,14 +31,15 @@ public class Engine {
 			if (startGame) {
 				dealOpeningHand(); //deal cards
 				do { // proceed with normal play
-					for (AbstractPlayer currentPlayer : game.getPlayers()) {
+					for (AbstractPlayer currentPlayer : game.getPlayers()) {  // one cycle here represents one player's turn
 						currentPlayer.deduceFromPersonalCardTracker(); // deduce hand from global tracker
 						
-						if (currentPlayer instanceof ComputerPlayer) { // current player is the computer
+						if (currentPlayer instanceof HumanPlayer) { // current player is a human
+							Move selectedMove = requestMoveFromPlayer((HumanPlayer)currentPlayer); // get the human's move
 							
 						}
 						else { // current player is the computer
-							
+							//TODO figure out what the computer is going to do
 						}
 					}
 					
