@@ -39,13 +39,14 @@ public class Engine {
 							
 							//execute move
 							if (selectedMove.getMoveType().equals(MoveType.DISCARD_CARD)) {
-								
+								//play card and process it
 								try {
 									game.processPlayedCard(currentPlayer, currentPlayer.playCard(selectedMove.getTargetHandIndices().get(0))); // we can expect that there will only be one index in this array, hope i'm not proven wrong
 								} catch (Exception e) {
 									System.out.println(e.getMessage());
 									e.printStackTrace();
 								}
+								//draw replacement card
 							}
 							else if (selectedMove.getMoveType().equals(MoveType.PLAY_CARD)) {
 								
@@ -299,7 +300,7 @@ public class Engine {
 		int cardsPerHand = game.getPlayers().size() > 3 ? 4 : 5;
 		for (int i = 0; i < cardsPerHand; i++) {
 			for (AbstractPlayer gainingPlayer : game.getPlayers()) {
-				Card gainedCard = gainingPlayer.gainCardToHand(game.getDeck(), game.getColorVariant());
+				Card gainedCard = gainingPlayer.drawCard(game.getDeck(), game.getColorVariant());
 				notifyPlayersOnGainToHand(gainingPlayer, gainedCard);
 			}
 		}
