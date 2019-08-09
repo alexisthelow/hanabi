@@ -33,6 +33,10 @@ public enum Color implements CardAttribute {
 		return "color";
 	}
 	
+	public String toString() {
+		return this.getName();
+	}
+	
 	public static List<CardAttribute> getListOfColors() {
 		return new ArrayList<CardAttribute>(Arrays.asList(Color.values()));
 	}

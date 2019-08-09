@@ -33,6 +33,10 @@ public enum Number implements CardAttribute {
 		return "number";
 	}
 	
+	public String toString() {
+		return "" + this.getAdjustedValue();
+	}
+	
 	public static List<CardAttribute> getListOfNumbers() {
 		return new ArrayList<CardAttribute>(Arrays.asList(Color.values()));
 	}
