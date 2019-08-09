@@ -32,17 +32,7 @@ public class Game {
 		this.colorVariant = ColorVariant.NONE;
 	}
 
-	public void playCard(AbstractPlayer player, int handIndex) {
-		Card playedCard = player.getHand().remove(handIndex);
-		player.getCardInfoTables().remove(handIndex);
-		player.gainCardToHand(this.deck, this.colorVariant);
-		try {
-			processPlayedCard(player, playedCard);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
+
 	
 	public void processPlayedCard(AbstractPlayer player, Card card) throws Exception {
 		
@@ -85,16 +75,14 @@ public class Game {
 				gainClock();
 			}
 			
-			
-			//TODO notify players to update GlobalCardTrackers
 		}
 		else {
 			burnFuse();
-			processDiscard(card);
+			processDiscard(card, true); //TODO clock should not be regained in this instance
 		}
 	}
 	
-	public Boolean processDiscard(Card card) throws Exception {
+	public Boolean processDiscard(Card card, boolean discardFromFailedPlay) throws Exception {
 		
 		ArrayList<Card> relevantDiscardPile;
 		switch (card.getColor()) {
@@ -127,6 +115,9 @@ public class Game {
 		}
 		
 		relevantDiscardPile.add(card);
+		if (!discardFromFailedPlay) {
+			gainClock();
+		}
 		//TODO sort here
 		//TODO notify discarding player to update GlobalCardTracker
 		return true;
