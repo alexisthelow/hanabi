@@ -3,7 +3,7 @@ package hanabi.cards;
 import hanabi.cards.identifiers.Color;
 import hanabi.cards.identifiers.Number;
 
-public class Card implements Comparable {
+public class Card implements Comparable<Card> {
 	
 	private Color color;
 	private Number number;
@@ -108,9 +108,8 @@ public class Card implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		Card c = (Card) o; // the argument will always be a card
-		return this.color.getValue() < c.getColor().getValue() ? -1 : this.color.getValue() > c.getColor().getValue() ? 1 : this.number.getValue() < c.getNumber().getValue() ? -1 : this.number.getValue() > c.getNumber().getValue() ? 1 : 0;
+	public int compareTo(Card c2) {
+		return this.color.getValue() < c2.getColor().getValue() ? -1 : this.color.getValue() > c2.getColor().getValue() ? 1 : this.number.getValue() < c2.getNumber().getValue() ? -1 : this.number.getValue() > c2.getNumber().getValue() ? 1 : 0;
 	}
 	
 }
