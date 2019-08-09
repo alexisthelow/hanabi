@@ -101,8 +101,6 @@ class CardTest {
 		Card blueOne = new Card(Color.BLUE, Number.ONE);
 		Card greenTwo = new Card(Color.RED, Number.TWO);
 		Card whiteFour = new Card(Color.WHITE, Number.FOUR);
-		Card yellowFive = new Card(Color.YELLOW, Number.FIVE);
-		Card multicolorOne = new Card(Color.MULTICOLOR, Number.ONE);
 		Card redOne = new Card(Color.RED, Number.ONE);
 		Card redThree = new Card(Color.RED, Number.THREE);
 		Card redFive = new Card(Color.RED, Number.FIVE);
