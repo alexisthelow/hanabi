@@ -48,12 +48,14 @@ class CardTest {
 		Card c5 = new Card(3,3);
 		Card c6 = new Card(4,4);
 		Card c7 = new Card(5,0);
+		Card c8 = new Card(9,9);
 		assertEquals("Blue 1", c2.toString());
 		assertEquals("Green 2", c3.toString());
 		assertEquals("Red 3", c4.toString());
 		assertEquals("White 4", c5.toString());
 		assertEquals("Yellow 5", c6.toString());
 		assertEquals("Multicolor 1", c7.toString());
+		assertEquals("Blue 1", c8.toString());
 	}
 
 	@Test
@@ -96,9 +98,25 @@ class CardTest {
 
 	@Test
 	void testCompareTo() {
-		assertTrue(c.compareTo(new Card(0, 0)) == 1);
-		assertFalse(c.compareTo(new Card(0, 0)) == -1);
-		assertFalse(c.compareTo(new Card(0, 0)) == 0);
+		Card blueOne = new Card(Color.BLUE, Number.ONE);
+		Card greenTwo = new Card(Color.RED, Number.TWO);
+		Card whiteFour = new Card(Color.WHITE, Number.FOUR);
+		Card yellowFive = new Card(Color.YELLOW, Number.FIVE);
+		Card multicolorOne = new Card(Color.MULTICOLOR, Number.ONE);
+		Card redOne = new Card(Color.RED, Number.ONE);
+		Card redThree = new Card(Color.RED, Number.THREE);
+		Card redFive = new Card(Color.RED, Number.FIVE);
+		
+		assertTrue(c.compareTo(blueOne) == 1);
+		assertTrue(c.compareTo(greenTwo) == 1);
+		assertTrue(c.compareTo(redThree) == 0);
+		assertTrue(c.compareTo(redOne) == 1);
+		assertTrue(c.compareTo(redFive) == -1);
+		assertTrue(c.compareTo(whiteFour) == -1);
+//		assertTrue(c.compareTo(new Card(0, 0)) == 1);
+//		assertFalse(c.compareTo(new Card(0,0)) == 0);
+//		assertFalse(c.compareTo(new Card(0, 0)) == -1);
+//		assertFalse(c.compareTo(new Card(0, 0)) == 0);
 	}
 
 }
