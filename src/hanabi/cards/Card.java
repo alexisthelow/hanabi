@@ -16,7 +16,7 @@ public class Card implements Comparable {
 		this.ownerIdentified = false;
 	}
 	
-	public Card(Integer numberValue, Integer colorValue) {
+	public Card(Integer colorValue, Integer numberValue) {
 		
 		switch (numberValue) {
 		
@@ -97,7 +97,7 @@ public class Card implements Comparable {
 
 	@Override
 	public String toString() {
-		return color + " " + number;
+		return color.toString() + " " + number.toString();
 	}
 
 	@Override
