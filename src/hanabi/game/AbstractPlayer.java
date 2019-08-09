@@ -47,7 +47,7 @@ public class AbstractPlayer {
 	}
 	
 	//gains card to hand, returns card gained so other players can be updated
-	public Card gainCardToHand(Deck deck, ColorVariant colorVariant) {
+	public Card drawCard(Deck deck, ColorVariant colorVariant) {
 		Card c = deck.getCards().pop();
 		this.hand.add(c);
 		this.cardInfoTables.add(getNewCardInfoTable(colorVariant));
