@@ -10,6 +10,7 @@ public class DiscardPile {
 	private ArrayList<Card> whites;
 	private ArrayList<Card> yellows;
 	private ArrayList<Card> multicolors;
+	private ArrayList<ArrayList<Card>> collectedPiles;
 	
 	public DiscardPile() {
 		super();
@@ -19,10 +20,19 @@ public class DiscardPile {
 		this.whites = new ArrayList<Card>();
 		this.yellows = new ArrayList<Card>();
 		this.multicolors = new ArrayList<Card>();
+		this.collectedPiles = new ArrayList<ArrayList<Card>>;
+		this.collectedPiles.add(this.blues);
+		this.collectedPiles.add(this.greens);
+		this.collectedPiles.add(this.reds);
+		this.collectedPiles.add(this.whites);
+		this.collectedPiles.add(this.yellows);
+		this.collectedPiles.add(this.multicolors);
 	}
 	
-	//TODO add sorter
-	
+	public ArrayList<ArrayList<Card>> getCollectedPiles() {
+		return collectedPiles;
+	}
+
 	public ArrayList<Card> getBlues() {
 		return blues;
 	}
