@@ -26,16 +26,33 @@ public class Engine {
 	
 	public static void main(String[] args) {
 		while (!quitGame) {
-			mainMenu();
+			mainMenu(); // players will set game parameters and add all players here
 			
 			if (startGame) {
-				dealOpeningHand(); //deal cards
+				dealOpeningHand(); // deal cards
 				do { // proceed with normal play
 					for (AbstractPlayer currentPlayer : game.getPlayers()) {  // one cycle here represents one player's turn
 						currentPlayer.deduceFromPersonalCardTracker(); // deduce hand from global tracker
 						
 						if (currentPlayer instanceof HumanPlayer) { // current player is a human
 							Move selectedMove = requestMoveFromPlayer((HumanPlayer)currentPlayer); // get the human's move
+							
+							//execute move
+							if (selectedMove.getMoveType().equals(MoveType.DISCARD_CARD)) {
+								
+								try {
+									game.processPlayedCard(currentPlayer, currentPlayer.playCard(selectedMove.getTargetHandIndices().get(0))); // we can expect that there will only be one index in this array, hope i'm not proven wrong
+								} catch (Exception e) {
+									System.out.println(e.getMessage());
+									e.printStackTrace();
+								}
+							}
+							else if (selectedMove.getMoveType().equals(MoveType.PLAY_CARD)) {
+								
+							}
+							else { // move must be give info
+								
+							}
 							
 						}
 						else { // current player is the computer
@@ -48,11 +65,6 @@ public class Engine {
 				} while (!game.isGameOver());
 				
 				
-				// discover possible actions
-					// if clocks == 0, cannot give info
-					// if clocks == 8, cannot discard
-					
-				// if player is human, ask for move
 				// if computer, discover move
 				// execute move
 					// if discard, regain clock and player gains new card
