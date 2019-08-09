@@ -20,7 +20,7 @@ public class DiscardPile {
 		this.whites = new ArrayList<Card>();
 		this.yellows = new ArrayList<Card>();
 		this.multicolors = new ArrayList<Card>();
-		this.collectedPiles = new ArrayList<ArrayList<Card>>;
+		this.collectedPiles = new ArrayList<ArrayList<Card>>();
 		this.collectedPiles.add(this.blues);
 		this.collectedPiles.add(this.greens);
 		this.collectedPiles.add(this.reds);
