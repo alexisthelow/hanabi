@@ -1,68 +1,97 @@
 package hanabi.cards;
-
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Stack;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import hanabi.cards.Card;
+import hanabi.cards.Deck;
+import hanabi.cards.PersonalCardTracker;
 import hanabi.game.ColorVariant;
 
-class DeckTest {
+public class DeckTest {
+
+	Deck standardDeck;
+	Deck singleMulticolorDeck;
+	Deck multicolorDeck;
 	
-	Deck sd;
-	Deck msd;
-	Deck mfd;
+	@Before
+	public void setUp() throws Exception {
+		standardDeck = new Deck(ColorVariant.NONE);
+		singleMulticolorDeck = new Deck(ColorVariant.MULTICOLOR_SINGLE);
+		multicolorDeck = new Deck(ColorVariant.MULTICOLOR);
+	}
 
-	@BeforeEach
-	void setUp() throws Exception {
-		sd = new Deck(ColorVariant.NONE);
-		msd = new Deck(ColorVariant.MULTICOLOR_SINGLE);
-		mfd = new Deck(ColorVariant.MULTICOLOR);
- 	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-		sd = null;
-		msd = null;
-		mfd = null;
+	@After
+	public void tearDown() throws Exception {
+		standardDeck = null;
+		singleMulticolorDeck = null;
+		multicolorDeck = null;
 	}
 
 	@Test
-	void testDeck() {
-		assertTrue(sd.getCards().size() == 50);
-		assertTrue(msd.getCards().size() == 55);
-		assertTrue(mfd.getCards().size() == 60);
+	public void decks_are_correct_sizes() {
+		assertEquals(50, standardDeck.getCards().size());
+		assertEquals(55, singleMulticolorDeck.getCards().size());
+		assertEquals(60, multicolorDeck.getCards().size());
 	}
-
+	
 	@Test
-	void testGetCards() {
-		assertTrue(sd.getCards() instanceof Stack<?>);
-		assertTrue(msd.getCards() instanceof Stack<?>);
-		assertTrue(mfd.getCards() instanceof Stack<?>);
+	public void decks_contain_correct_cards() {
+		PersonalCardTracker pcts = new PersonalCardTracker(ColorVariant.NONE);
+		PersonalCardTracker pctm = new PersonalCardTracker(ColorVariant.MULTICOLOR);
+		PersonalCardTracker pctms = new PersonalCardTracker(ColorVariant.MULTICOLOR_SINGLE);
+		
+		for (Card c : standardDeck.getCards()) { // for each card in the standard deck
+			pcts.cardSeen(c);
+		}
+		for (Card c : singleMulticolorDeck.getCards()) { // for each card in the single multicolor deck
+			pctms.cardSeen(c);
+		}
+		for (Card c : multicolorDeck.getCards()) {
+			pctm.cardSeen(c);
+		}
+		
+		boolean standardDeckCorrect = true;
+		boolean singleMulticolorDeckCorrect = true;
+		boolean multicolorDeckCorrect = true;
+		
+		for (Integer[] at : pcts.getCards()) {
+			for (Integer integer : at) {
+				if (integer != 0) {
+					standardDeckCorrect = false;
+				}
+			}
+		}
+		for (Integer[] at : pctm.getCards()) {
+			for (Integer integer : at) {
+				if (integer != 0) {
+					multicolorDeckCorrect = false;
+				}
+			}
+		}
+		for (Integer[] at : pctms.getCards()) {
+			for (Integer integer : at) {
+				if (integer != 0) {
+					singleMulticolorDeckCorrect = false;
+				}
+			}
+		}
+		assertTrue(standardDeckCorrect);
+		assertTrue(singleMulticolorDeckCorrect);
+		assertTrue(multicolorDeckCorrect);
 	}
-
+	
 	@Test
-	void testShuffleDeck() {
-		sd.shuffleDeck();
-		msd.shuffleDeck();
-		mfd.shuffleDeck();
-		Deck sdTest = new Deck(ColorVariant.NONE);
-		Deck msdTest = new Deck(ColorVariant.MULTICOLOR_SINGLE);
-		Deck mfdTest = new Deck(ColorVariant.MULTICOLOR);
-		assertFalse(sd.equals(sdTest));
-		assertFalse(msd.equals(msdTest));
-		assertFalse(mfd.equals(mfdTest));
-	}
-
-	@Test
-	void testToString() {
-		assertTrue(sd.toString() instanceof String);
-		assertTrue(msd.toString() instanceof String);
-		assertTrue(mfd.toString() instanceof String);
+	public void do_the_decks_look_shuffled_lets_find_out() {
+		standardDeck.shuffleDeck();
+		singleMulticolorDeck.shuffleDeck();
+		multicolorDeck.shuffleDeck();
+		System.out.println(standardDeck.toString());
+		System.out.println(singleMulticolorDeck.toString());
+		System.out.println(multicolorDeck.toString());
 	}
 
 }
