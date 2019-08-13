@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hanabi.cards.Card;
+import hanabi.cards.Deck;
 import hanabi.cards.identifiers.*;
 import hanabi.cards.identifiers.Number;
 import hanabi.game.AbstractPlayer;
@@ -29,6 +30,8 @@ public class Engine {
 			mainMenu(); // players will set game parameters and add all players here
 			
 			if (startGame) {
+				game.setDeck(new Deck(game.getColorVariant()));
+				
 				dealOpeningHand(); // deal cards
 				do { // proceed with normal play
 					for (AbstractPlayer currentPlayer : game.getPlayers()) {  // one cycle here represents one player's turn
