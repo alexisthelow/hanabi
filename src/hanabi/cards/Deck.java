@@ -22,10 +22,10 @@ public class Deck {
 				int repeat = i == 0 ? 3 : i == 4 ? 1 : 2; // if i is 0, add 3 cards; if 4, add 1; if 1-3, add 2
 				int current = 0;
 				
-				do { 
-					cards.add(new Card(i, j));
+				while (current < repeat) { 
+					cards.add(new Card(j, i));
 					current++;
-				} while (current < repeat); // add the card to the deck that many times
+				} ; // add the card to the deck that many times
 			}
 		}
 		
@@ -34,7 +34,7 @@ public class Deck {
 		}
 		else if (colorVariant.equals(ColorVariant.MULTICOLOR_SINGLE)) { // add one of each multicolor (deck size is 55)
 			for (int i = 0; i < 5; i++) { // for each number
-				this.cards.add(new Card(i, 5));
+				this.cards.add(new Card(5, i));
 			}
 		}
 		else { // we must be using all of the multicolors! (deck size is 60)
@@ -44,13 +44,11 @@ public class Deck {
 				int current = 0;
 				
 				do { 
-					cards.add(new Card(i, 5));
+					cards.add(new Card(5, i));
 					current++;
 				} while (current < repeat); // add the card to the deck that many times
 			}
 		}
-		
-		shuffleDeck();
 		
 	}
 
