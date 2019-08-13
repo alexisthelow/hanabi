@@ -6,7 +6,7 @@ import java.util.List;
 
 public enum Color implements CardAttribute {
 	
-	BLUE("Blue", 0), GREEN("Green", 1), RED("Red", 2), YELLOW("Yellow", 3),  WHITE("White", 4), MULTICOLOR("Multicolor", 5);
+	BLUE("Blue", 0), GREEN("Green", 1), RED("Red", 2), WHITE("White", 3), YELLOW("Yellow", 4), MULTICOLOR("Multicolor", 5);
 	
 	private String name;
 	private int value;
