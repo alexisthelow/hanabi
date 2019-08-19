@@ -256,27 +256,6 @@ public class AbstractPlayer {
 		this.name = name;
 	}
 	
-	public String printIdentifiedHand() {
-		StringBuilder sb = new StringBuilder();
-		int counter = 1;
-		for (Card c : this.hand) {
-			sb.append("Card #" + counter++ + ": ");
-			if (c.getOwningPlayerDeducedIdentity()) {
-				sb.append(c.toString()).append("/n");
-			}
-			else {
-				AttributeTracker[][] at = this.cardInfoTables.get(counter - 1);
-				for (int i = 0; i < at.length; i++) {
-					for (int j = 0; j < at[i].length; j++) {
-						
-					}
-				}
-			}
-		}
-		
-		return sb.toString();
-	}
-	
 	public String printHand() {
 		StringBuilder sb = new StringBuilder();
 		int counter = 1;
