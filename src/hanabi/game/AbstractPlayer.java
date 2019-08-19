@@ -7,6 +7,8 @@ import hanabi.cards.Deck;
 import hanabi.cards.PersonalCardTracker;
 import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
+import hanabi.cards.identifiers.Color;
+import hanabi.cards.identifiers.Number;
 import hanabi.cards.identifiers.FourState;
 
 public class AbstractPlayer {
@@ -252,6 +254,53 @@ public class AbstractPlayer {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String printIdentifiedHand() {
+		StringBuilder sb = new StringBuilder();
+		int counter = 1;
+		for (Card c : this.hand) {
+			sb.append("Card #" + counter++ + ": ");
+			if (c.getOwningPlayerDeducedIdentity()) {
+				sb.append(c.toString()).append("/n");
+			}
+			else {
+				AttributeTracker[][] at = this.cardInfoTables.get(counter - 1);
+				for (int i = 0; i < at.length; i++) {
+					for (int j = 0; j < at[i].length; j++) {
+						if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
+							sb.append(Color.getColorByValue(j).toString());
+						}
+						else if (at[i][j].getNumber().equals(FourState.YES)) { // do we know the number?
+							sb.append(Number.getNumberByValue(i).toString());
+						}
+						// is there anything that is a maybe?
+						else if (at[i][j].getColor().equals(FourState.MAYBE)) {
+							sb.append(Color.getColorByValue(j)).append("?");
+						}
+						else if (at[i][j].getNumber().equals(FourState.MAYBE)) {
+							sb.append(Number.getNumberByValue(i)).append("?");
+						}
+					}
+				}
+				//what it is
+				sb.append("Is: ");
+				
+				//what it might be
+				//what it is not
+			}
+		}
+		
+		return sb.toString();
+	}
+	
+	public String printHand() {
+		StringBuilder sb = new StringBuilder();
+		int counter = 1;
+		for (Card c : this.hand) {
+			sb.append(counter++ + ") "+ c.toString() + " ");
+		}
+		return sb.toString();
 	}
 	
 }
