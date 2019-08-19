@@ -36,7 +36,7 @@ public class AbstractPlayer {
 		this.hand = hand;
 		this.personalCardTracker = new PersonalCardTracker(colorVariant);
 		
-		for (Card c : hand) {
+		for (@SuppressWarnings("unused") Card c : hand) {
 			this.cardInfoTables.add(getNewCardInfoTable(colorVariant));
 		}
 	}
@@ -268,22 +268,7 @@ public class AbstractPlayer {
 				AttributeTracker[][] at = this.cardInfoTables.get(counter - 1);
 				for (int i = 0; i < at.length; i++) {
 					for (int j = 0; j < at[i].length; j++) {
-						if (at[i][j].getColor().equals(FourState.YES) && at[i][j].getNumber().equals(FourState.YES)) { 
-							// skip cells where both are true--already accounted for above
-						}
-						else if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
-							sb.append(Color.getColorByValue(j).toString());
-						}
-						else if (at[i][j].getNumber().equals(FourState.YES)) { // do we know the number?
-							sb.append(Number.getNumberByValue(i).toString());
-						}
-						// is there anything that is a maybe?
-						else if (at[i][j].getColor().equals(FourState.MAYBE)) {
-							sb.append(Color.getColorByValue(j)).append("?");
-						}
-						else if (at[i][j].getNumber().equals(FourState.MAYBE)) {
-							sb.append(Number.getNumberByValue(i)).append("?");
-						}
+						
 					}
 				}
 			}
@@ -301,4 +286,39 @@ public class AbstractPlayer {
 		return sb.toString();
 	}
 	
+	//prints everything that is known about a specific card in hand
+	public String printIdentifiedCard(int handIndex) {
+		Card targetCard = this.getHand().get(handIndex);
+		AttributeTracker[][] at = this.cardInfoTables.get(handIndex);
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < at.length; i++) {
+			for (int j = 0; j < at[i].length; j++) {
+				if (at[i][j].getColor().equals(FourState.YES) && at[i][j].getNumber().equals(FourState.YES)) { 
+					sb.append(targetCard.toString());
+				}
+				else if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
+					sb.append(Color.getColorByValue(j).toString());
+				}
+				else if (at[i][j].getNumber().equals(FourState.YES)) { // do we know the number?
+					sb.append(Number.getNumberByValue(i).toString());
+				}
+				else if (at[i][j].getColor().equals(FourState.MAYBE)) { //is color a maybe?
+					sb.append("Might be ").append(Color.getColorByValue(j));
+				}
+				else if (at[i][j].getNumber().equals(FourState.MAYBE)) { //is number a maybe?
+					sb.append("Might be ").append(Number.getNumberByValue(i));
+				}
+				else if (at[i][j].getColor().equals(FourState.NO)) { //is color a no?
+					sb.append("Is not " ).append(Color.getColorByValue(j));
+				}
+				else if (at[i][j].getNumber().equals(FourState.NO)) { //is number a no?
+					sb.append("Is not " ).append(Number.getNumberByValue(i));
+				}
+				
+				
+			}
+		}
+		
+		return sb.toString();
+	}
 }
