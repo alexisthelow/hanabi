@@ -268,7 +268,10 @@ public class AbstractPlayer {
 				AttributeTracker[][] at = this.cardInfoTables.get(counter - 1);
 				for (int i = 0; i < at.length; i++) {
 					for (int j = 0; j < at[i].length; j++) {
-						if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
+						if (at[i][j].getColor().equals(FourState.YES) && at[i][j].getNumber().equals(FourState.YES)) { 
+							// skip cells where both are true--already accounted for above
+						}
+						else if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
 							sb.append(Color.getColorByValue(j).toString());
 						}
 						else if (at[i][j].getNumber().equals(FourState.YES)) { // do we know the number?
@@ -283,11 +286,6 @@ public class AbstractPlayer {
 						}
 					}
 				}
-				//what it is
-				sb.append("Is: ");
-				
-				//what it might be
-				//what it is not
 			}
 		}
 		
