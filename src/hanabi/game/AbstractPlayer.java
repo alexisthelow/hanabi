@@ -256,6 +256,7 @@ public class AbstractPlayer {
 		this.name = name;
 	}
 	
+	// should only be used when the card is completely identified
 	public String printHand() {
 		StringBuilder sb = new StringBuilder();
 		int counter = 1;
@@ -273,7 +274,7 @@ public class AbstractPlayer {
 		for (int i = 0; i < at.length; i++) {
 			for (int j = 0; j < at[i].length; j++) {
 				if (at[i][j].getColor().equals(FourState.YES) && at[i][j].getNumber().equals(FourState.YES)) { 
-					sb.append(targetCard.toString());
+					sb.append("Identified as: ").append(targetCard.toString());
 				}
 				else if (at[i][j].getColor().equals(FourState.YES)) { // do we know the color?
 					sb.append(Color.getColorByValue(j).toString());
