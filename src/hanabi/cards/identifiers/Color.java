@@ -40,4 +40,34 @@ public enum Color implements CardAttribute {
 	public static List<CardAttribute> getListOfColors() {
 		return new ArrayList<CardAttribute>(Arrays.asList(Color.values()));
 	}
+	
+	public static Color getColorByValue(int value) {
+		Color c;
+		
+		switch (value) {
+			case 0:
+				c = Color.BLUE;
+				break;
+			case 1:
+				c = Color.GREEN;
+				break;
+			case 2:
+				c = Color.RED;
+				break;
+			case 3:
+				c = Color.WHITE;
+				break;
+			case 4:
+				c = Color.YELLOW;
+				break;
+			case 5:
+				c = Color.MULTICOLOR;
+				break;
+	
+			default:
+				c = null;
+				break;
+		}
+		return c;
+	}
 }

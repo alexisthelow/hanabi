@@ -41,4 +41,30 @@ public enum Number implements CardAttribute {
 		return new ArrayList<CardAttribute>(Arrays.asList(Color.values()));
 	}
 	
+	public static Number getNumberByValue(int value) {
+		Number n;
+		switch (value) {
+			case 0:
+				n = Number.ONE;
+				break;
+			case 1:
+				n = Number.TWO;
+				break;
+			case 2:
+				n = Number.THREE;
+				break;
+			case 3:
+				n = Number.FOUR;
+				break;
+			case 4:
+				n = Number.FIVE;
+				break;
+	
+			default:
+				n = null;
+				break;
+		}
+		return n;
+	}
+	
 }
