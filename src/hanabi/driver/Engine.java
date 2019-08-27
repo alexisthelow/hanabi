@@ -31,12 +31,16 @@ public class Engine {
 			
 			if (startGame) {
 				game.setDeck(new Deck(game.getColorVariant()));
-				
+				game.getDeck().shuffleDeck();
 				dealOpeningHand(); // deal cards
 				do { // proceed with normal play
 					for (AbstractPlayer currentPlayer : game.getPlayers()) {  // one cycle here represents one player's turn
+						System.out.println(currentPlayer.getName() + ", it is your turn!");
 						currentPlayer.deduceFromPersonalCardTracker(); // deduce hand from global tracker
-						
+						//TODO print out both what is known about the player's hand AND all other players' hands
+						for (int i = 0; i < currentPlayer.getHand().size(); i++) {
+							currentPlayer.printIdentifiedCard(i);
+						}
 						if (currentPlayer instanceof HumanPlayer) { // current player is a human
 							Move selectedMove = requestMoveFromPlayer((HumanPlayer)currentPlayer); // get the human's move
 							
