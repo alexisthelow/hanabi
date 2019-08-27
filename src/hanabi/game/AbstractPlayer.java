@@ -123,6 +123,9 @@ public class AbstractPlayer {
 								if (j == attribute.getValue()) { // it does
 									maybeFoundMatchesOld = true;
 								}
+								else {
+									maybeFoundDoesNotMatchOld = true;
+								}
 							}
 						}
 					}
@@ -166,8 +169,15 @@ public class AbstractPlayer {
 					// indicated cards are complete
 				}
 				for (AttributeTracker[][] cardTable : notIndicatedCards) {
+					
+					//TODO if a maybe value is found, it must be flipped to yes
 					for (int i = 0; i < cardTable.length; i++) {
-						cardTable[i][attribute.getValue()].setColor(FourState.NO);
+						if (cardTable[i][attribute.getValue()].getColor().equals(FourState.MAYBE)) {
+							cardTable[i][attribute.getValue()].setColor(FourState.YES);
+						}
+						else {
+							cardTable[i][attribute.getValue()].setColor(FourState.NO);
+						}
 					}
 				}
 				//non indicated cards complete
