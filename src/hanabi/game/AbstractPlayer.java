@@ -2,14 +2,16 @@ package hanabi.game;
 
 import java.util.ArrayList;
 
+import javax.swing.text.AttributeSet.ColorAttribute;
+
 import hanabi.cards.Card;
 import hanabi.cards.Deck;
 import hanabi.cards.PersonalCardTracker;
 import hanabi.cards.identifiers.AttributeTracker;
 import hanabi.cards.identifiers.CardAttribute;
 import hanabi.cards.identifiers.Color;
-import hanabi.cards.identifiers.Number;
 import hanabi.cards.identifiers.FourState;
+import hanabi.cards.identifiers.Number;
 
 public class AbstractPlayer {
 	
@@ -232,6 +234,19 @@ public class AbstractPlayer {
 		
 		return cardTable;
 		
+	}
+	
+	public ArrayList<Integer> findIndicatedCardIndices(AbstractPlayer targetPlayer, CardAttribute indicatedAttribute) {
+	    ArrayList<Integer> indicatedCardIndices = new ArrayList<>();
+	    
+	    if (indicatedAttribute instanceof Color) {
+	        
+	    }
+	    for (int i = 0; i < targetPlayer.getHand().size(); i++) {
+            
+        }
+	    
+	    return indicatedCardIndices;
 	}
 
 	public ArrayList<Card> getHand() {
